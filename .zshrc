@@ -22,6 +22,10 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Setting nvim as default editor
+export EDITOR=nvim
+export VISUAL=nvim
+
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -49,7 +53,9 @@ zinit cdreplay -q
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
-bindkey -e
+bindkey -e # emacs mode
+# bindkey '^f' autosuggest-accept
+# this is set by default by emacs
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
@@ -76,8 +82,21 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
+alias cat='bat'
+alias grep='rg'
 alias vim='nvim'
 alias c='clear'
+alias rm="rm -I" # safety with rm
+alias getmeout="shutdown -h now"
+
+alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
+alias cdsystems="cd ~/Documents/cis-384/"
+# alias cdtest="cd ~/spaghetti/test/"
+
+
+# alias 'sudo pacman -S'='sudo pacman -S --needed'
+
+
 
 # Shell integrations
 eval "$(fzf --zsh)"

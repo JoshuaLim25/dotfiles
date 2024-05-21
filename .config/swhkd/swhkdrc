@@ -1,0 +1,33 @@
+# swhkd configuration with Alt key
+
+# Launch terminal
+alt + Return = kitty
+
+# Close focused window
+alt + Shift + Q = swaymsg kill
+
+# Reload sway configuration
+alt + Shift + C = swaymsg reload
+
+# Launch dmenu
+alt + D = dmenu_run
+
+# Lock the screen
+alt + L = swaylock
+
+# Launch browser
+alt + B = firefox
+
+# Adjust Brightness
+XF86MonBrightnessUp = sudo brillo -q -A 10
+XF86MonBrightnessDown = sudo brillo -q -U 10
+
+# Adjust Volume
+XF86AudioRaiseVolume = pactl set-sink-volume @DEFAULT_SINK@ +5%
+XF86AudioLowerVolume = pactl set-sink-volume @DEFAULT_SINK@ -5%
+XF86AudioMute = pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Media Control (if applicable)
+XF86AudioPlay = playerctl play-pause
+XF86AudioNext = playerctl next
+XF86AudioPrev = playerctl previous
