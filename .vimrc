@@ -16,4 +16,4 @@ set guicursor+=a:blinkon0
 "Sets correct tab size
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+" set shiftwidth=4

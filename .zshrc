@@ -23,8 +23,8 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Setting nvim as default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
