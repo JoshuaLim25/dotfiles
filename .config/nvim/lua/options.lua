@@ -13,6 +13,7 @@ vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+
 -- visual block cool behavior
 vim.opt.virtualedit = 'block'
 -- "true color support" for terminals like kitty

@@ -21,7 +21,18 @@ return {
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup(opts)
+      -- require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter.configs').setup {
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<leader>ss',
+            node_incremental = '<leader>si',
+            scope_incremental = '<leader>sc',
+            node_decremental = '<leader>sd',
+          },
+        },
+      }
 
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
