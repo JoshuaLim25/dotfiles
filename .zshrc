@@ -10,6 +10,10 @@ fi
 #   eval "$(/opt/homebrew/bin/brew shellenv)"
 # fi
 
+# for rustup tab completions
+fpath+=~/.zfunc
+
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -136,6 +140,10 @@ abbrev-alias cdtest="cd ~/spaghetti/test/"
 alias c='clear'
 alias ls='ls --color'
 alias grep='rg'
+alias vim='nvim'
+
+# Git aliases
+alias gs="git status"
 
 # Shell integrations
 eval "$(fzf --zsh)"

@@ -1,10 +1,3 @@
---[[
---
--- This file is not required for your own configuration,
--- but helps people determine if their system is setup correctly.
---
---]]
-
 local check_version = function()
   local verstr = string.format('%s.%s.%s', vim.version().major, vim.version().minor, vim.version().patch)
   if not vim.version.cmp then
