@@ -42,6 +42,30 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'codelldb',
+      },
+    }
+
+    -- Configuration for Rust with codelldb
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = 'codelldb', -- Ensure codelldb path is correct; adjust if needed
+        args = { '--port', '${port}' },
+      },
+    }
+    dap.configurations.rust = {
+      {
+        name = 'Launch',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
       },
     }
 

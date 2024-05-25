@@ -88,7 +88,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>cap', vim.lsp.buf.code_action, '[C]ode [A]ction [P]ick')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -163,12 +163,12 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
-        rust_analyzer = {
-          filetypes = { 'rust' },
-          cargo = {
-            allFeatures = true,
-          },
-        },
+        -- rust_analyzer = {
+        --   filetypes = { 'rust' },
+        --   cargo = {
+        --     allFeatures = true,
+        --   },
+        -- },
         bashls = {},
         -- jdtls = {},
         -- python = {},
@@ -215,7 +215,7 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'clangd',
-        'rust_analyzer',
+        -- 'rust_analyzer',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
