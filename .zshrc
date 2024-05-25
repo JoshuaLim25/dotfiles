@@ -5,10 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+# if [[ -f "/opt/homebrew/bin/brew" ]] then
+#   # If you're using macOS, you'll want this enabled
+#   eval "$(/opt/homebrew/bin/brew shellenv)"
+# fi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -23,8 +23,11 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Setting nvim as default editor
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='usr/bin/nvim'
+export VISUAL='usr/bin/nvim'
+
+# shouldn't need this, but in case
+# export PATH="$HOME/.cargo/bin:$PATH"
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -80,23 +83,59 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# alias (abbreviation) expansion, a really dope feature
+# declare a list of expandable aliases to fill up later
+typeset -a ealiases
+ealiases=()
+
+# write a function for adding an alias to the list mentioned above
+function abbrev-alias() {
+    alias $1
+    ealiases+=(${1%%\=*})
+}
+
+# expand any aliases in the current line buffer
+function expand-ealias() {
+    if [[ $LBUFFER =~ "\<(${(j:|:)ealiases})\$" ]]; then
+        zle _expand_alias
+        zle expand-word
+    fi
+    zle magic-space
+}
+zle -N expand-ealias
+
+# Bind the space key to the expand-alias function above, so that space will expand any expandable aliases
+bindkey ' '        expand-ealias
+# bindkey '^ '       magic-space     # control-space to bypass completion
+# bindkey -M isearch " "      magic-space     # normal space during searches
+
+# A function for expanding any aliases before accepting the line as is and executing the entered command
+expand-alias-and-accept-line() {
+    expand-ealias
+    zle .backward-delete-char
+    zle .accept-line
+}
+zle -N accept-line expand-alias-and-accept-line
+
+# Abbreviations
+abbrev-alias cat='bat'
+abbrev-alias v='nvim'
+abbrev-alias rm="rm -I" # safety with rm
+abbrev-alias getmeout="shutdown -h now"
+abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
+abbrev-alias cdsystems="cd ~/Documents/cis-384/"
+abbrev-alias cdtest="cd ~/spaghetti/test/"
+
+
 # Aliases
-alias ls='ls --color'
-alias cat='bat'
-alias grep='rg'
-alias vim='nvim'
+
 alias c='clear'
-alias rm="rm -I" # safety with rm
-alias getmeout="shutdown -h now"
-
-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
-alias cdsystems="cd ~/Documents/cis-384/"
-# alias cdtest="cd ~/spaghetti/test/"
-
-
-# alias 'sudo pacman -S'='sudo pacman -S --needed'
-
-
+alias ls='ls --color'
+alias grep='rg'
 
 # Shell integrations
 eval "$(fzf --zsh)"

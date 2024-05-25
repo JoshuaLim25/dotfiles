@@ -133,8 +133,14 @@ return {
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+              local bufnr = vim.api.nvim_get_current_buf() -- Get the current buffer number
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
             end, '[T]oggle Inlay [H]ints')
+
+            -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            -- map('<leader>th', function()
+            --   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            -- end, '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -157,10 +163,18 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
+        rust_analyzer = {
+          filetypes = { 'rust' },
+          cargo = {
+            allFeatures = true,
+          },
+        },
+        bashls = {},
+        -- jdtls = {},
         -- python = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -191,6 +205,7 @@ return {
       --  other tools, you can run
       --    :Mason
       --
+
       --  You can press `g?` for help in this menu.
       require('mason').setup()
 
@@ -199,10 +214,13 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'clangd',
+        'rust_analyzer',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        -- { PATH = 'append' },
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -210,6 +228,7 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
             require('lspconfig')[server_name].setup(server)
           end,
         },

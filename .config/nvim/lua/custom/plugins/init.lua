@@ -5,8 +5,6 @@
 return {
   'christoomey/vim-tmux-navigator',
   'stevearc/oil.nvim',
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-  },
+  'nvim-lualine/lualine.nvim',
+  -- 'mrcjkb/rustaceanvim',
 }

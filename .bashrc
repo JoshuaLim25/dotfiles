@@ -175,3 +175,4 @@ PS1=${THEME_PROMPT_CHAR_PS1:-"❯ "}
 #nvim libstdc++.6 fix, with treesitter fucking up
 export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
+. "$HOME/.cargo/env"
