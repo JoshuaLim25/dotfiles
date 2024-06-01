@@ -170,6 +170,7 @@ return {
         --   },
         -- },
         bashls = {},
+        dockerls = {},
         -- jdtls = {},
         -- python = {},
         -- gopls = {},

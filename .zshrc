@@ -27,11 +27,15 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Setting nvim as default editor
-export EDITOR='usr/bin/nvim'
-export VISUAL='usr/bin/nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # shouldn't need this, but in case
 # export PATH="$HOME/.cargo/bin:$PATH"
+
+# bat color
+export BAT_THEME="ansi"
+
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k

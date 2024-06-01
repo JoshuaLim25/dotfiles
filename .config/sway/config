@@ -9,6 +9,9 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod1
 
+# get rid of fugly title bar
+default_border none
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -30,7 +33,7 @@ font pango: JetBrainsMono Nerd Font 14
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/Downloads/banana.jpg fill
 #
 # Example configuration:
 #
@@ -223,6 +226,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 
 # Mute/Unmute
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 
 # Increase brightness
@@ -236,14 +240,33 @@ bindsym XF86MonBrightnessDown exec brillo -q -U 1
 # # Decrease brightness
 # bindsym XF86MonBrightnessDown exec brightnessctl set -10%
 
+# from arch wiki
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86Search exec bemenu-run
+
+
+# Assign applications to specific workspaces
+assign [app_id="firefox"] workspace number 1
+assign [app_id="kitty"] workspace number 3
+assign [app_id="obsidian"] workspace number 8
+
+# Workspace switching
+# bindsym $mod+1 workspace number 1
+
+# Start applications on login
+exec firefox
+exec kitty
+exec obsidian
+
+
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     swaybar_command waybar
 }
-
-
 
 
 include /etc/sway/config.d/*

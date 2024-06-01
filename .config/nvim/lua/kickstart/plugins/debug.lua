@@ -51,7 +51,7 @@ return {
       type = 'server',
       port = '${port}',
       executable = {
-        command = 'codelldb', -- Ensure codelldb path is correct; adjust if needed
+        command = '/home/josh/.local/share/nvim/mason/bin/codelldb', -- Ensure codelldb path is correct; adjust if needed
         args = { '--port', '${port}' },
       },
     }
