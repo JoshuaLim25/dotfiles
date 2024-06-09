@@ -29,13 +29,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Setting nvim as default editor
 export EDITOR='nvim'
 export VISUAL='nvim'
-
+ 
 # shouldn't need this, but in case
 # export PATH="$HOME/.cargo/bin:$PATH"
 
 # bat color
 export BAT_THEME="ansi"
 
+# Python path edition
+# export PYTHONPATH="`pwd`:$PYTHONPATH"
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -137,6 +139,8 @@ abbrev-alias getmeout="shutdown -h now"
 abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
+abbrev-alias dcbuild="docker-compose build"
+abbrev-alias dcup="docker-compose up"
 
 
 # Aliases

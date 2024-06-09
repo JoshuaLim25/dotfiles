@@ -250,7 +250,8 @@ bindsym XF86Search exec bemenu-run
 # Assign applications to specific workspaces
 assign [app_id="firefox"] workspace number 1
 assign [app_id="kitty"] workspace number 3
-assign [app_id="obsidian"] workspace number 8
+# assign [app_id="obsidian"] workspace number 8
+assign [class="obsidian"] workspace number 8
 
 # Workspace switching
 # bindsym $mod+1 workspace number 1
@@ -259,6 +260,15 @@ assign [app_id="obsidian"] workspace number 8
 exec firefox
 exec kitty
 exec obsidian
+
+# Screenshots
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
+
+# save selected region to designated folder
+# bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshot-$(date +%Y%m%d-%H%M%S).png
+
+# entire screen, no selection
+# bindsym Print exec grim ~/Pictures/Screenshot-$(date +%Y%m%d-%H%M%S).png
 
 
 # Status Bar:

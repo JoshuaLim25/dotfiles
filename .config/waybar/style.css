@@ -4,7 +4,7 @@
 }
 
 window#waybar {
-    font-family: Hack Nerd Font;
+    font-family: Noto Sans Mono Nerd Font;
     font-size: 15px;
     color: #fbf1c7;
     background:  rgba(40,40,40,0.9);
