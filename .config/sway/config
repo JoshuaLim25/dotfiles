@@ -9,7 +9,7 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod1
 
-# get rid of fugly title bar
+# get rid of stupid title bar
 default_border none
 
 # Home row direction keys, like vim
@@ -33,7 +33,7 @@ font pango: JetBrainsMono Nerd Font 14
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Downloads/banana.jpg fill
+# output * bg ~/Downloads/banana.jpg fill
 #
 # Example configuration:
 #
@@ -74,6 +74,9 @@ output eDP-1 resolution 1920x1200 scale 1.0
 #
 # Basics:
 #
+
+    # # swap caps esc
+    # input "type:keyboard" xkb_options caps:swapescape
 
     # Start a terminal
     bindsym $mod+Return exec $term

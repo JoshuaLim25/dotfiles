@@ -147,6 +147,7 @@ abbrev-alias dcup="docker-compose up"
 
 alias c='clear'
 alias ls='ls --color'
+alias ll='ls -l --color'
 alias grep='rg'
 alias vim='nvim'
 
