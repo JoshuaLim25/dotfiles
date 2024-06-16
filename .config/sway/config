@@ -33,7 +33,11 @@ font pango: JetBrainsMono Nerd Font 14
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg ~/Downloads/banana.jpg fill
+output * bg ~/Downloads/moon.jpg fill
+# output * bg ~/Downloads/plane.jpg fill
+# output * bg ~/Downloads/windows.jpg fill
+# output * bg ~/Downloads/galaxy.jpg fill
+# output * bg ~/Downloads/sky.jpg fill
 #
 # Example configuration:
 #
@@ -82,7 +86,7 @@ output eDP-1 resolution 1920x1200 scale 1.0
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -186,8 +190,11 @@ output eDP-1 resolution 1920x1200 scale 1.0
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
+    bindsym $mod+minus scratchpad show;
+    # bindsym $mod+minus scratchpad show; move workspace current; move position center; resize set 100 ppt 100 ppt
+    # move position center: Centers the window in the current workspace.
+    # resize set 100 ppt 100 ppt: Resizes the window to take up 100% of the parent container's width and height (excluding the bar).
+
 # Resizing containers:
 #
 mode "resize" {
@@ -210,6 +217,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 bindsym $mod+r mode "resize"
 
 
@@ -233,10 +241,11 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 
 # Increase brightness
-bindsym XF86MonBrightnessUp exec brillo -q -A 5
+bindsym XF86MonBrightnessUp exec sudo brillo -q -A 3
 
 # Decrease brightness
-bindsym XF86MonBrightnessDown exec brillo -q -U 1
+bindsym XF86MonBrightnessDown exec sudo brillo -q -U 3
+
 # # Increase brightness
 # bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 #
@@ -250,10 +259,13 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec bemenu-run
 
 
+# use the command below to get the right name, replace <appname>
+# swaymsg -t get_tree | jq '.. | select(.type?)'
 # Assign applications to specific workspaces
 assign [app_id="firefox"] workspace number 1
+assign [class="Spotify"] workspace number 2
 assign [app_id="kitty"] workspace number 3
-# assign [app_id="obsidian"] workspace number 8
+assign [class="discord"] workspace number 4
 assign [class="obsidian"] workspace number 8
 
 # Workspace switching
@@ -263,6 +275,7 @@ assign [class="obsidian"] workspace number 8
 exec firefox
 exec kitty
 exec obsidian
+exec dunst &
 
 # Screenshots
 bindsym Print exec grim -g "$(slurp)" - | wl-copy

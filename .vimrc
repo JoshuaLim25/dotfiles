@@ -11,8 +11,6 @@ set guicursor=n-v-c:block
 " Disable blinking
 set guicursor+=a:blinkon0
 
-" 
-
 "Sets correct tab size
 set tabstop=4
 set softtabstop=4
