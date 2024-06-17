@@ -49,17 +49,16 @@
 - `reflector`
 - `qemu` (see the octetz vid, `bridge-utils` is a biggie)
 - `pacman-contrib` (for cache cleaning, look it up)
-- `yay` or `paru` (AUR helper, automates the manual pkgbuild process)
 - `xclip`
 - `xbindkeys`
 - `xorg-xhost`
 - `docker`
 - `docker-compose`
 - `grim`
-- `scrot`
+- `slurp`
 - `bemenu`
 - `dunst`
-
+- `alsa-utils`
 
 ## Sway
 
@@ -71,7 +70,6 @@
 - `swaylock`
 - `swayimg`
 - `wl-clipboard`
-- `xclip` (restating bc you need BOTH)
 - `wlroots`
 - `wofi`
 - `wlr-randr`
@@ -82,6 +80,13 @@
 
 - Run `chsh -s /usr/bin/zsh`, assuming `which zsh` returns that (and source it)
 - clone the `tpm` github repo, this should be put in `~/.config/tmux/plugins/tpm`
+
+## Install AUR Helper:
+
+- `yay` or `paru` (AUR helper, automates the manual pkgbuild process)
+- Clone the associate git repo, `cd` into it, and run `makepkg -si`
+- `sudo chown -R  josh:users yay`
+- `sudo git clone https://aur.archlinux.org/yay.git`
 
 ## Ly
 
@@ -146,5 +151,5 @@ Afterwards, enable `reflector.service` to run on boot
 
 
 ## Docker
-- Enable `docker.socket`
+- Enable `docker.socket` (only starts docker service on usage)
 - Note that docker.service starts the service on boot, whereas docker.socket starts docker on first usage which can decrease boot times
