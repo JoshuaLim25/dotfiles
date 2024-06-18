@@ -13,6 +13,8 @@ fi
 # for rustup tab completions
 fpath+=~/.zfunc
 
+# Hacky fix to get rid of error message
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -145,9 +147,7 @@ abbrev-alias dcbuild="docker-compose build"
 abbrev-alias dcup="docker-compose up"
 abbrev-alias gs="git status"
 abbrev-alias gc="git commit"
-# abbrev-alias
-# abbrev-alias
-# abbrev-alias
+abbrev-alias dc="docker-compose"
 
 
 # Aliases
