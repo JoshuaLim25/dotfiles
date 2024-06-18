@@ -34,10 +34,10 @@ font pango: JetBrainsMono Nerd Font 14
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg ~/Downloads/moon.jpg fill
-# output * bg ~/Downloads/plane.jpg fill
+output * bg ~/Downloads/plane.jpg fill
 # output * bg ~/Downloads/windows.jpg fill
 # output * bg ~/Downloads/galaxy.jpg fill
-output * bg ~/Downloads/sky.jpg fill
+# output * bg ~/Downloads/sky.jpg fill
 #
 # Example configuration:
 #
@@ -250,7 +250,7 @@ bindsym XF86MonBrightnessDown exec sudo brillo -q -U 3
 # bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 #
 # # Decrease brightness
-# bindsym XF86MonBrightnessDown exec brightnessctl set -10%
+# bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # from arch wiki
 bindsym XF86AudioPlay exec playerctl play-pause

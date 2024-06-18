@@ -102,6 +102,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 typeset -a ealiases
 ealiases=()
 
+# To get an alias definition just call it with alias
+# e.g., `alias ll` will print ll='ls -lh'
 # write a function for adding an alias to the list mentioned above
 function abbrev-alias() {
     alias $1
@@ -141,13 +143,18 @@ abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias dcbuild="docker-compose build"
 abbrev-alias dcup="docker-compose up"
+abbrev-alias gs="git status"
+abbrev-alias gc="git commit"
+# abbrev-alias
+# abbrev-alias
+# abbrev-alias
 
 
 # Aliases
 
 alias c='clear'
 alias ls='ls --color'
-alias ll='ls -l --color'
+alias ll='ls -lh --color'
 alias grep='rg'
 alias vim='nvim'
 
