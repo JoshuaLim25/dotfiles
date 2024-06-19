@@ -59,6 +59,7 @@
 - `bemenu`
 - `dunst`
 - `alsa-utils`
+- `evtest` (for tracking keyboard inputs)
 
 ## Sway
 

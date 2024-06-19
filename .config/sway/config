@@ -71,6 +71,11 @@ output eDP-1 resolution 1920x1200 scale 1.0
 #       middle_emulation enabled
 #   }
 #
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 

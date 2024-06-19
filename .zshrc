@@ -143,23 +143,29 @@ abbrev-alias getmeout="shutdown -h now"
 abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
+abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
+
+## Git
+abbrev-alias gs="git status"
+abbrev-alias ga="git add"
+abbrev-alias gaa="git add ."
+abbrev-alias gc="git commit"
+abbrev-alias gp="git push"
+abbrev-alias gd="git diff"
+abbrev-alias gr="git restore --staged"
+abbrev-alias gra="git restore --staged ."
+
+## Docker
+abbrev-alias dc="docker-compose"
 abbrev-alias dcbuild="docker-compose build"
 abbrev-alias dcup="docker-compose up"
-abbrev-alias gs="git status"
-abbrev-alias gc="git commit"
-abbrev-alias dc="docker-compose"
-
 
 # Aliases
-
 alias c='clear'
 alias ls='ls --color'
 alias ll='ls -lh --color'
 alias grep='rg'
 alias vim='nvim'
-
-# Git aliases
-alias gs="git status"
 
 # Shell integrations
 eval "$(fzf --zsh)"
