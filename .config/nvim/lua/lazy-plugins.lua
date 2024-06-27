@@ -18,35 +18,35 @@ require('lazy').setup({
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
-  require 'kickstart/plugins/gitsigns',
+  require 'essential/plugins/gitsigns',
 
-  require 'kickstart/plugins/which-key',
+  require 'essential/plugins/which-key',
 
-  require 'kickstart/plugins/telescope',
+  require 'essential/plugins/telescope',
 
-  require 'kickstart/plugins/lspconfig',
+  require 'essential/plugins/lspconfig',
 
-  require 'kickstart/plugins/conform',
+  require 'essential/plugins/conform',
 
-  require 'kickstart/plugins/cmp',
+  require 'essential/plugins/cmp',
 
-  require 'kickstart/plugins/color-scheme',
+  require 'essential/plugins/color-scheme',
 
-  require 'kickstart/plugins/todo-comments',
+  require 'essential/plugins/todo-comments',
 
-  require 'kickstart/plugins/mini',
+  require 'essential/plugins/mini',
 
-  require 'kickstart/plugins/treesitter',
+  require 'essential/plugins/treesitter',
 
-  require 'kickstart.plugins.debug',
+  require 'essential.plugins.indent_line',
 
-  require 'kickstart.plugins.indent_line',
+  require 'essential.plugins.lint',
 
-  require 'kickstart.plugins.lint',
+  require 'essential.plugins.autopairs',
 
-  require 'kickstart.plugins.autopairs',
+  require 'essential.plugins.neo-tree',
 
-  require 'kickstart.plugins.neo-tree',
+  -- require 'essential.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

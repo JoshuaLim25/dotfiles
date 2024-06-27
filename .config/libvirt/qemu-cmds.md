@@ -1,10 +1,14 @@
+# Good refresh:
+https://wiki.archlinux.org/title/QEMU#Creating_new_virtualized_system
+https://drewdevault.com/2018/09/10/Getting-started-with-qemu.html
+
+`du -h file.qcow2` will show you the real occupied disk space 
+
 # Warning
 
 If you store the hard disk images on a Btrfs file system, you should consider disabling Copy-on-Write for the directory before creating any images.
 Can be specified in option nocow for qcow2 format when creating image:
 `$ qemu-img create -f qcow2 image_file -o nocow=on 4G`
-
-
 
 # Installation:
 

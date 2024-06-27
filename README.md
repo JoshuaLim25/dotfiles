@@ -24,6 +24,7 @@
 - `npm`
 - `ripgrep`
 - `unzip`
+- `fd`
 - `stow`
 - `jq`
 - `sof-firmware`
@@ -76,6 +77,7 @@
 - `wlr-randr`
 - `wayland-protocols`
 - `ly`
+- `wtype`
 
 # Post Install TODOs:
 
