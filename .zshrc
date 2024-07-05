@@ -31,6 +31,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Setting nvim as default editor
 export EDITOR='nvim'
 export VISUAL='nvim'
+export MANPAGER='nvim +Man!'
  
 # shouldn't need this, but in case
 # export PATH="$HOME/.cargo/bin:$PATH"
@@ -95,12 +96,8 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-source ~/.abbrev-alias.sh
-
 # Abbreviations
+source ~/.abbrev-alias.sh
 abbrev-alias cat='bat'
 abbrev-alias v='nvim'
 abbrev-alias rm="rm -I" # safety with rm
@@ -109,6 +106,7 @@ abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
+abbrev-alias fman="whence -c -m '*' | fzf | xargs man"
 
 ## Git
 abbrev-alias gs="git status"
@@ -135,3 +133,5 @@ alias vim='nvim'
 # Shell integrations
 eval "$(fzf --zsh)"
 # eval "$(zoxide init --cmd cd zsh)"
+
+

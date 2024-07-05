@@ -10,6 +10,7 @@
 - `zsh`
 - `kitty` (or term of choice)
 - `man`
+- `man-pages`
 - `grub`
 - `os-prober`
 - `coreutils`
@@ -61,6 +62,7 @@
 - `dunst`
 - `alsa-utils`
 - `evtest` (for tracking keyboard inputs)
+- `tealdeer`
 
 ## Sway
 
@@ -81,8 +83,13 @@
 
 # Post Install TODOs:
 
+### ZSH
 - Run `chsh -s /usr/bin/zsh`, assuming `which zsh` returns that (and source it)
-- clone the `tpm` github repo, this should be put in `~/.config/tmux/plugins/tpm`
+
+### Tmux
+- Clone the `tpm` github repo, this should be put in `~/.config/tmux/plugins/tpm`
+- Run `tmux source ~/.config/tmux/tmux.conf`
+- `<Prefix+I>`
 
 ## Install AUR Helper:
 

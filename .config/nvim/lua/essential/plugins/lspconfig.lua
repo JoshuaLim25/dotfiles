@@ -48,6 +48,11 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
+          --
+          -- Disabling LSP semantic token highlighting
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          client.server_capabilities.semanticTokensProvider = nil
+          --
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
           --

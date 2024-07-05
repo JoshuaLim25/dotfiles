@@ -34,8 +34,8 @@ font pango: JetBrainsMono Nerd Font 14
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg ~/Downloads/moon.jpg fill
-output * bg ~/Downloads/plane.jpg fill
-# output * bg ~/Downloads/windows.jpg fill
+# output * bg ~/Downloads/plane.jpg fill
+output * bg ~/Downloads/windows.jpg fill
 # output * bg ~/Downloads/galaxy.jpg fill
 # output * bg ~/Downloads/sky.jpg fill
 #
