@@ -39,6 +39,7 @@
 - `ttf-opensans`
 - `ttf-dejavu`
 - `gnu-free-fonts`
+- `noto-fonts-emoji`
 - `intel-ucode` (amd is the other microcode, install yours)
 - `tlp`
 - `tlp-rdw`

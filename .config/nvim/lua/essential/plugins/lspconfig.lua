@@ -50,8 +50,8 @@ return {
         callback = function(event)
           --
           -- Disabling LSP semantic token highlighting
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          client.server_capabilities.semanticTokensProvider = nil
+          -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+          -- client.server_capabilities.semanticTokensProvider = nil
           --
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -98,6 +98,16 @@ return {
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+          local diagnostics_active = true
+          vim.keymap.set('n', '<leader>td', function()
+            diagnostics_active = not diagnostics_active
+            if diagnostics_active then
+              vim.diagnostic.show()
+            else
+              vim.diagnostic.hide()
+            end
+          end)
 
           -- -- Customize the hover window with rounded borders
           -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -171,12 +181,15 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
-        -- rust_analyzer = {
-        --   filetypes = { 'rust' },
-        --   cargo = {
-        --     allFeatures = true,
-        --   },
-        -- },
+
+        -- rust_analyzer = { cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' } },
+        rust_analyzer = {
+          cmd = { '/home/josh/.cargo/bin/rust-analyzer' }, -- Path to the system-installed rust-analyzer
+          filetypes = { 'rust' },
+          cargo = {
+            allFeatures = true,
+          },
+        },
         pyright = {},
         bashls = {},
         dockerls = {},
