@@ -72,7 +72,7 @@ box_drawing_scale 0.001, 1, 1.5, 2
 #: Cursor customization {{{
 
 #: Default cursor color
-# cursor #cccccc
+cursor #cccccc
 
 #: Choose the color of text under the cursor. If you want it rendered
 #: with the background color of the cell underneath instead, use the
@@ -1363,6 +1363,6 @@ map kitty_mod+f6 debug_config
 
 
 # BEGIN_KITTY_THEME
-# Kanagawa
+# kanagawabones
 include current-theme.conf
 # END_KITTY_THEME
