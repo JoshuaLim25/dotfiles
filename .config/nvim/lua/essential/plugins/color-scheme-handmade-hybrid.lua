@@ -16,11 +16,34 @@ return {
         diminactive = false, -- dim inactive window `:h hl-normalnc`
         terminalcolors = true, -- define vim.g.terminal_color_{0,17}
         colors = { -- add/modify theme and palette colors
-          palette = {},
+          palette = {
+            -- colors here:https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+            -- usages here: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua
+            -- tomorrow colors: https://github.com/chriskempson/vim-tomorrow-theme/blob/master/colors/Tomorrow-Night.vim
+            --
+            -- purple, for `keyword`
+            oniViolet = '#b294bb',
+            -- golden yellow, for `operator`
+            -- carpYellow = '#f0c674',
+            boatYellow2 = '#f0c674',
+            -- brighter red, for macros
+            waveRed = '#f2777a',
+            -- green, for `string`
+            springGreen = '#b5bd68',
+            -- light, muted blue, for `special-1` ?
+            springBlue = '#8abeb7',
+            -- (slightly) brighter light blue, for `type`
+            waveAqua2 = '#8abeb7',
+            -- dark(er) blue, for `fun`
+            crystalBlue = '#81a2be',
+            -- golden yellow, just for yellow parameters :]
+            oniViolet2 = '#f0c674',
+          },
           theme = {
             wave = {
               syn = {
-                parameter = 'yellow',
+                -- parameter = 'myYellow',
+                -- type = 'yellow',
               },
             },
             dragon = {},
@@ -70,4 +93,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

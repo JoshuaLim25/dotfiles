@@ -15,3 +15,6 @@ set guicursor+=a:blinkon0
 set tabstop=4
 set softtabstop=4
 " set shiftwidth=4
+"
+" let mapleader =" "
+" xnoremap('<leader>p', '"_dP')

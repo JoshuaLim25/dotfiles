@@ -30,7 +30,12 @@ require('lazy').setup({
 
   require 'essential/plugins/cmp',
 
-  require 'essential/plugins/color-scheme',
+  -- require 'essential/plugins/color-scheme-kanagawa-paper',
+  -- require 'essential/plugins/color-scheme-kanagawa',
+  require 'essential/plugins/color-scheme-handmade-hybrid',
+  -- require 'essential/plugins/color-scheme-hybrid',
+  -- require 'essential/plugins/color-scheme-hybrid2',
+  -- require 'essential/plugins/color-scheme-gruvbox-dark-hard',
 
   require 'essential/plugins/todo-comments',
 

@@ -20,7 +20,7 @@ return {
           theme = {
             wave = {
               syn = {
-                parameter = 'yellow',
+                -- parameter = 'yellow',
               },
             },
             dragon = {},
@@ -70,4 +70,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

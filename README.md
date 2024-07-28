@@ -64,6 +64,14 @@
 - `alsa-utils`
 - `evtest` (for tracking keyboard inputs)
 - `tealdeer`
+- `iperf`
+- `cups`
+- `cups-pdf`
+- `ghostscript`
+- `p7zip`
+- `python-pip`
+
+
 
 ## Sway
 

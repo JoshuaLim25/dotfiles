@@ -1,10 +1,10 @@
 return {
   {
-    'rebelot/kanagawa.nvim',
+    'sho-87/kanagawa-paper.nvim',
     priority = 1000,
     init = function()
       -- load the colorscheme here with custom settings.
-      require('kanagawa').setup {
+      require('kanagawa-paper').setup {
         compile = false, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentstyle = { italic = true },
@@ -18,17 +18,12 @@ return {
         colors = { -- add/modify theme and palette colors
           palette = {},
           theme = {
-            wave = {
-              syn = {
-                parameter = 'yellow',
-              },
-            },
-            dragon = {},
+            wave = {},
             lotus = {},
+            dragon = {},
             all = {
-              -- enable to remove "gutter" background, diff color
               -- ui = {
-              --   bg_gutter = 'none',
+              --   bg_gutter = 'none', -- enable to remove "gutter" background, diff color
               -- },
             },
           },
@@ -36,7 +31,6 @@ return {
         overrides = function(colors)
           local theme = colors.theme
           return {
-            -- Removes ugly borders
             normalfloat = { bg = 'none' },
             floatborder = { bg = 'none' },
             floattitle = { bg = 'none' },
@@ -48,13 +42,19 @@ return {
 
             -- popular plugins that open floats will link to normalfloat by default;
             -- set their background accordingly if you wish to keep them dark and borderless
-            -- lazynormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-            -- masonnormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            lazynormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            masonnormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            -- uncomment till
 
-            pmenu = {
-              fg = theme.ui.shade0,
-              bg = theme.ui.bg_p1, --[[ blend = vim.o.pumblend ]]
-            }, -- add `blend = vim.o.pumblend` to enable transparency
+            --
+            -- telescopetitle = { fg = theme.ui.special, bold = true },
+            -- telescopepromptnormal = { bg = theme.ui.bg_p1 },
+            -- telescopepromptborder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+            -- telescoperesultsnormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+            -- telescoperesultsborder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+            -- telescopepreviewnormal = { bg = theme.ui.bg_dim },
+            -- telescopepreviewborder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+            pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
             pmenusel = { fg = 'none', bg = theme.ui.bg_p2 },
             pmenusbar = { bg = theme.ui.bg_m1 },
             pmenuthumb = { bg = theme.ui.bg_p2 },
@@ -66,8 +66,7 @@ return {
           light = 'lotus',
         },
       }
-      vim.cmd 'colorscheme kanagawa' -- this should match the theme set in the setup function.
+      vim.cmd 'colorscheme kanagawa-paper'
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

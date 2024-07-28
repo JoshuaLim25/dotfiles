@@ -49,10 +49,6 @@ return {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
           --
-          -- Disabling LSP semantic token highlighting
-          -- local client = vim.lsp.get_client_by_id(event.data.client_id)
-          -- client.server_capabilities.semanticTokensProvider = nil
-          --
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
           --
@@ -98,16 +94,6 @@ return {
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-          local diagnostics_active = true
-          vim.keymap.set('n', '<leader>td', function()
-            diagnostics_active = not diagnostics_active
-            if diagnostics_active then
-              vim.diagnostic.show()
-            else
-              vim.diagnostic.hide()
-            end
-          end)
 
           -- -- Customize the hover window with rounded borders
           -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -160,6 +146,46 @@ return {
             --   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             -- end, '[T]oggle Inlay [H]ints')
           end
+
+          -- My changes:
+          -- Disabling LSP semantic token highlighting
+          -- client.server_capabilities.semanticTokensProvider = nil
+
+          -- Toggle LSP for a given servier
+          -- local function toggle_ltex()
+          --   local buf_clients = vim.lsp.get_clients { bufnr = 0 }
+          --   for _, _client in pairs(buf_clients) do
+          --     if _client.name == 'ltex' then
+          --       _client.stop()
+          --       return
+          --     end
+          --   end
+          --   vim.cmd 'LspStart ltex'
+          -- end
+          -- local function toggle_rust_analyzer()
+          --   local buf_clients = vim.lsp.get_clients { bufnr = 0 }
+          --   for _, _client in pairs(buf_clients) do
+          --     if _client.name == 'rust_analyzer' then
+          --       _client.stop()
+          --       return
+          --     end
+          --   end
+          --   vim.cmd 'LspStart rust_analyzer'
+          -- end
+          -- map('<leader>tl', toggle_rust_analyzer(), '[T]oggle [L]sp')
+
+          -- Toggle LSP Diagnostics
+          local diagnostics_active = true
+          vim.keymap.set('n', '<leader>td', function()
+            diagnostics_active = not diagnostics_active
+            if diagnostics_active then
+              vim.diagnostic.show()
+            else
+              vim.diagnostic.hide()
+            end
+          end)
+
+          -- end of autocommands
         end,
       })
 

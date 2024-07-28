@@ -6,7 +6,7 @@ return {
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'palenight', -- THEME, nightfly
+          theme = 'kanagawa', -- THEME, palenight, nightfly, kanagawa, kanagawa-paper, hybrid
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
           disabled_filetypes = {

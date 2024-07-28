@@ -100,7 +100,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 source ~/.abbrev-alias.sh
 abbrev-alias cat='bat'
 abbrev-alias v='nvim'
-abbrev-alias rm="rm -I" # safety with rm
 abbrev-alias getmeout="shutdown -h now"
 abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
@@ -129,6 +128,7 @@ alias ls='ls --color'
 alias ll='ls -lh --color'
 alias grep='rg'
 alias vim='nvim'
+alias rm="rm -I" # safety with rm
 
 # Shell integrations
 eval "$(fzf --zsh)"
