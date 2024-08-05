@@ -17,27 +17,47 @@ return {
         terminalcolors = true, -- define vim.g.terminal_color_{0,17}
         colors = { -- add/modify theme and palette colors
           palette = {
-            -- colors here:https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+            -- colors here: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
             -- usages here: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua
             -- tomorrow colors: https://github.com/chriskempson/vim-tomorrow-theme/blob/master/colors/Tomorrow-Night.vim
             --
+            -- background
+            -- gutter, `bg_gutter`
+            -- dragonBlack4 = '#373b41', -- grayish
+            dragonBlack4 = '#282a2e',
+
+            -- "background", `bg`
+            dragonBlack3 = '#1d1f21',
+
             -- purple, for `keyword`
             oniViolet = '#b294bb',
+            dragonViolet = '#b294bb',
             -- golden yellow, for `operator`
             -- carpYellow = '#f0c674',
             boatYellow2 = '#f0c674',
+            dragonRed = '#f0c674',
             -- brighter red, for macros
             waveRed = '#f2777a',
             -- green, for `string`
             springGreen = '#b5bd68',
+            dragonGreen2 = '#b5bd68',
             -- light, muted blue, for `special-1` ?
-            springBlue = '#8abeb7',
+            -- springBlue = '#8abeb7',
             -- (slightly) brighter light blue, for `type`
             waveAqua2 = '#8abeb7',
+            dragonAqua = '#8abeb7',
             -- dark(er) blue, for `fun`
             crystalBlue = '#81a2be',
+            dragonBlue2 = '#81a2be',
+            -- this ones darker
+            -- crystalBlue = '#7aa6da',
             -- golden yellow, just for yellow parameters :]
             oniViolet2 = '#f0c674',
+            dragonGray = '#f0c674',
+            --
+            -- punct as white
+            springViolet2 = '#DCD7BA',
+            -- dragonGray2 = '#DCD7BA',
           },
           theme = {
             wave = {

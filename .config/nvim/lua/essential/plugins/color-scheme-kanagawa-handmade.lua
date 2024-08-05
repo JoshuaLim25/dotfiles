@@ -25,7 +25,7 @@ return {
             -- for `keyword`
             oniViolet = '#b294bb',
             -- golden yellow
-            -- for `operator`
+            -- for ``
             -- carpYellow = '#f0c674',
             boatYellow2 = '#f0c674',
             -- red

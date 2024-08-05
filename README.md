@@ -70,7 +70,7 @@
 - `ghostscript`
 - `p7zip`
 - `python-pip`
-
+- `gdb`
 
 
 ## Sway

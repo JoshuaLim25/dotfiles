@@ -5,3 +5,9 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+[diff]
+	tool = nvimdiff
+[merge]
+	tool = nvimdiff
+[mergetool]
+	prompt = true
