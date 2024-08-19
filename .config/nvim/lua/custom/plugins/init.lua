@@ -4,6 +4,6 @@ return {
   'nvim-lualine/lualine.nvim',
   'rust.vim',
   'mbbill/undotree',
-  -- 'noice_nvim',
+  'max397574/better-escape.nvim',
   -- 'mrcjkb/rustaceanvim',
 }

@@ -129,6 +129,7 @@ alias ll='ls -lh --color'
 alias grep='rg'
 alias vim='nvim'
 alias rm="rm -I" # safety with rm
+alias ip="ip --color=auto"
 
 # Shell integrations
 eval "$(fzf --zsh)"

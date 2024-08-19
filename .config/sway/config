@@ -281,6 +281,7 @@ exec firefox
 exec kitty
 exec obsidian
 exec dunst &
+exec wlsunset -S 05:30 -s 18:30 -t 3000
 
 # Screenshots
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
