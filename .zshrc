@@ -36,6 +36,14 @@ export MANPAGER='nvim +Man!'
 # shouldn't need this, but in case
 # export PATH="$HOME/.cargo/bin:$PATH"
 
+# Note: you want to define that directory to the path variable, not the actual binary e.g.
+# PATH=$MYDIR:$PATH
+# where MYDIR is defined as the directory containing your binary e.g.
+# PATH=/Users/username/bin:$PATH
+# NOTE: Order matters, the example above prepends, switch to append
+
+export PATH=$PATH:~/.local/bin/scripts
+
 # bat color
 export BAT_THEME="ansi"
 
@@ -52,29 +60,27 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+# Don't even use these, could be useful though
+# `rm -rf .local/share/zinit/snippets`
+# zinit snippet OMZP::git
+# zinit snippet OMZP::sudo
+# zinit snippet OMZP::archlinux
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+# zinit snippet OMZP::command-not-found
 
 # Load completions
 autoload -Uz compinit && compinit
 
+# Used to replay cached completions, recommended
 zinit cdreplay -q
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
-bindkey -e # emacs mode
-# bindkey '^f' autosuggest-accept
-# this is set by default by emacs
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
+source ~/.dotfiles/scripts/set-vi-mode.sh
 
 # History
 HISTSIZE=5000
@@ -97,23 +103,30 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Abbreviations
-source ~/.abbrev-alias.sh
+source ~/.dotfiles/scripts/abbrev-alias.sh
 abbrev-alias cat='bat'
 abbrev-alias v='nvim'
 abbrev-alias getmeout="shutdown -h now"
+
+# Quick Navigation
 abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
-abbrev-alias fman="whence -c -m '*' | fzf | xargs man"
+abbrev-alias cdgit="cd ~/Documents/playground/"
+# Project-specific
+abbrev-alias cdip="cd ~/research-projects/seed-emulator-dev/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
+abbrev-alias cdlogs="cd ~/research-projects/iperf3-logs/"
 
 ## Git
+abbrev-alias g="git "
 abbrev-alias gs="git status"
 abbrev-alias ga="git add"
 abbrev-alias gaa="git add ."
 abbrev-alias gc="git commit"
 abbrev-alias gp="git push"
 abbrev-alias gd="git diff"
+abbrev-alias gl="git log --oneline --graph --decorate"
 abbrev-alias gr="git restore --staged"
 abbrev-alias gra="git restore --staged ."
 
@@ -130,9 +143,8 @@ alias grep='rg'
 alias vim='nvim'
 alias rm="rm -I" # safety with rm
 alias ip="ip --color=auto"
+alias vimdiff='nvim -d'
 
 # Shell integrations
 eval "$(fzf --zsh)"
 # eval "$(zoxide init --cmd cd zsh)"
-
-

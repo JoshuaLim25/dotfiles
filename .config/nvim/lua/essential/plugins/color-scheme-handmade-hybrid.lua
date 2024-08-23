@@ -27,7 +27,8 @@ return {
             dragonBlack4 = '#282a2e',
 
             -- "background", `bg`
-            dragonBlack3 = '#1d1f21',
+            -- sumiInk3 = '#1d2021',
+            dragonBlack3 = '#1d2021',
 
             -- purple, for `keyword`
             oniViolet = '#b294bb',
@@ -47,10 +48,11 @@ return {
             waveAqua2 = '#8abeb7',
             dragonAqua = '#8abeb7',
             -- dark(er) blue, for `fun`
-            crystalBlue = '#81a2be',
-            dragonBlue2 = '#81a2be',
+            -- this ones lighter
+            -- crystalBlue = '#81a2be',
             -- this ones darker
-            -- crystalBlue = '#7aa6da',
+            crystalBlue = '#7aa6da',
+            dragonBlue2 = '#81a2be',
             -- golden yellow, just for yellow parameters :]
             oniViolet2 = '#f0c674',
             dragonGray = '#f0c674',

@@ -71,6 +71,8 @@
 - `p7zip`
 - `python-pip`
 - `gdb`
+- `ninja`
+- `meson`
 
 
 ## Sway

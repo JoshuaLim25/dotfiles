@@ -6,8 +6,9 @@
 [core]
 	editor = nvim
 [diff]
-	tool = nvimdiff
+	tool = nvim -d
 [merge]
-	tool = nvimdiff
+	tool = nvim -d
 [mergetool]
 	prompt = true
+	trustExitCode = false

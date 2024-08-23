@@ -1,6 +1,6 @@
 # alias (abbreviation) expansion, a really dope feature
 # declare a list of expandable aliases to fill up later
-typeset -a ealiases
+typeset -a ealiases    # creates array
 ealiases=()
 
 # To get an alias definition just call it with alias
