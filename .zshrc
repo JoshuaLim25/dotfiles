@@ -42,6 +42,7 @@ export MANPAGER='nvim +Man!'
 # PATH=/Users/username/bin:$PATH
 # NOTE: Order matters, the example above prepends, switch to append
 
+# Symlinked to ~/.dotfiles/scripts
 export PATH=$PATH:~/.local/bin/scripts
 
 # bat color
@@ -58,6 +59,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light kutsan/zsh-system-clipboard
 
 # Add in snippets
 # Don't even use these, could be useful though
@@ -81,6 +83,11 @@ zinit cdreplay -q
 
 # Keybindings
 source ~/.dotfiles/scripts/set-vi-mode.sh
+
+# SSH
+source ~/.dotfiles/scripts/ssh.sh
+# See ~/.config/systemd/user/ssh-agent.service
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # History
 HISTSIZE=5000

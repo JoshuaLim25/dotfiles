@@ -28,3 +28,13 @@ bindkey -s -M viins "^o" "popd -q\n"
 # shift-tab to move backwards in the completion list
 # bindkey '^[[Z' reverse-menu-complete
 # bindkey '^p' reverse-menu-complete
+
+# Yank to the system clipboard
+# See: https://stackoverflow.com/questions/37398532/how-do-i-yank-into-the-system-register-from-v-imode
+# function vi-yank-xclip {
+#     zle vi-yank
+#    echo "$CUTBUFFER" | xclip -i
+# }
+#
+# zle -N vi-yank-xclip
+# bindkey -M vicmd 'y' vi-yank-xclip

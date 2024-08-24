@@ -73,6 +73,7 @@
 - `gdb`
 - `ninja`
 - `meson`
+- `openbsd-netcat`
 
 
 ## Sway
@@ -174,3 +175,28 @@ Afterwards, enable `reflector.service` to run on boot
 ## Docker
 - Enable `docker.socket` (only starts docker service on usage)
 - Note that docker.service starts the service on boot, whereas docker.socket starts docker on first usage which can decrease boot times
+
+
+## SSH
+- Ensure you have the requisite programs, `openssh`
+- Enable `sshd.service`
+
+### To automate the ssh-agent process
+- See: [SO post](https://stackoverflow.com/questions/18880024/start-ssh-agent-on-login)
+- See: [wiki page](https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user)
+- `systemd` service, put in ~/.config/systemd/user/ssh-agent.service
+
+```sh
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+```
+
