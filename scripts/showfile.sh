@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 # showfile - show the contents of a file, including additional useful info
 
 width=72
@@ -22,6 +22,6 @@ do
 
   echo "-----------------------------------------------------------------"
 
-done | less
+done | more
 
 exit 0

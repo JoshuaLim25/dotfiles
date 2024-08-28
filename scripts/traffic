@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Show how many bytes of data have been received (download)
+# and transmitted (upload) since this script was last run
+
+logfile_b="$HOME/research-projects/iperf3-logs/homemade_traffic_bytes.log"
+if [[ ! -f "${logfile_b}" ]]; then
+    touch "${logfile_b}"
+fi
+
+logfile_d="$HOME/research-projects/iperf3-logs/homemade_traffic_dropped.log"
+if [[ ! -f "${logfile_d}" ]]; then
+    touch "${logfile_d}"
+fi
+
+prev_bytes=$(cat "$logfile_b" || echo "0 0")
+prev_dropped=$(cat "$logfile_d" || echo "0 0")
+
+curr_rx_bytes=$(paste -d '+' /sys/class/net/*/statistics/rx_bytes | bc)
+curr_tx_bytes=$(paste -d '+' /sys/class/net/*/statistics/tx_bytes | bc)
+
+curr_rx_dropped=$(paste -d '+' /sys/class/net/*/statistics/rx_dropped | bc)
+curr_tx_dropped=$(paste -d '+' /sys/class/net/*/statistics/tx_dropped | bc)
+
+printf "Difference in received bytes: %sKB\nDifference in transmitted bytes: %sKB\n" \
+    "$(( (${curr_rx_bytes} - ${prev_bytes%% *})/1024 ))" \
+    "$(( (${curr_tx_bytes} - ${prev_bytes##* })/1024 ))"
+
+printf "Difference in dropped received bytes: %sKB\nDifference in dropped transmitted bytes: %sKB\n" \
+    "$(( (${curr_rx_dropped} - ${prev_dropped%% *})/1024 ))" \
+    "$(( (${curr_tx_dropped} - ${prev_dropped##* })/1024 ))"
+
+echo "${curr_rx_bytes} ${curr_tx_bytes}" > "$logfile_b"
+echo "${curr_rx_dropped} ${curr_tx_dropped}" > "$logfile_d"

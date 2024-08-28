@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Used/Total Memory Usage:"
+free -h | awk '/^Mem:/ {print $3 "/" $2}'
+echo '*-*-*-*-*-*-*-*-*-*-*'
+echo "CPU Temp:"
+sensors | awk '/^CPU:/ {print $2}'
+echo '*-*-*-*-*-*-*-*-*-*-*'
+echo "Memory Hogs:"
+ps axch -o cmd:15,%mem --sort=-%mem | head
+echo '*-*-*-*-*-*-*-*-*-*-*'
+echo "CPU Hogs:"
+ps axch -o cmd:15,%cpu --sort=-%cpu | head

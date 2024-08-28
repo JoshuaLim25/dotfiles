@@ -29,8 +29,8 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Setting nvim as default editor
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR="$(which nvim)"
+export VISUAL="$(which nvim)"
 export MANPAGER='nvim +Man!'
  
 # shouldn't need this, but in case
@@ -122,7 +122,7 @@ abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
 abbrev-alias cdgit="cd ~/Documents/playground/"
 # Project-specific
-abbrev-alias cdip="cd ~/research-projects/seed-emulator-dev/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
+abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
 abbrev-alias cdlogs="cd ~/research-projects/iperf3-logs/"
 
 ## Git
@@ -141,6 +141,7 @@ abbrev-alias gra="git restore --staged ."
 abbrev-alias dc="docker-compose"
 abbrev-alias dcbuild="docker-compose build"
 abbrev-alias dcup="docker-compose up"
+abbrev-alias za="zathura"
 
 # Aliases
 alias c='clear'
@@ -151,6 +152,10 @@ alias vim='nvim'
 alias rm="rm -I" # safety with rm
 alias ip="ip --color=auto"
 alias vimdiff='nvim -d'
+
+# Aliased refs
+alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
+alias refcron="nvim ~/spaghetti/tools/cron.sh"
 
 # Shell integrations
 eval "$(fzf --zsh)"

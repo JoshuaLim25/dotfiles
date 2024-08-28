@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # diskspace - summarize available disk space and present in a logical
 #    and readable fashion

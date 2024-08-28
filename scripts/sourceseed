@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Set PYTHONPATH to include the current directory
+# Initialize PYTHONPATH if it is not already set
+: "${PYTHONPATH:=$(pwd)}"
+export PYTHONPATH="$(pwd):$PYTHONPATH"
+
+source seedenv/bin/activate || echo "failed"
+
+cd "$HOME/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator/"

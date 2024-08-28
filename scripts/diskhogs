@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case $# in
+(0) dir='.';;
+(1) dir=$1;;
+(*) echo "usage: hog <dir>"
+  exit 1;;
+esac
+
+du -sh --one-file-system $dir/* $dir/.[A-Za-z0-9]* | sort -rn | head

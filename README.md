@@ -74,7 +74,7 @@
 - `ninja`
 - `meson`
 - `openbsd-netcat`
-
+- `bc`
 
 ## Sway
 

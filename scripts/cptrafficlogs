@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+log_dir=~/research-projects/iperf3-logs
+mkdir -p "$log_dir"
+timestamp=$(date +'%Y-%m-%d-%H-%M')
+
+iperf_logfile="${log_dir}/${timestamp}-iperf3-generator.log"
+ditg_logfile=${log_dir}/"${timestamp}-ditg-generator.log"
+
+# Get the container ID for 'multi-traffic-generator'
+container_id=$(docker ps -a --filter "name=multi-traffic-generator" --format "{{.ID}}")
+
+if [ -z "$container_id" ]; then
+    echo "No container found with the name containing 'multi-traffic-generator'"
+    exit 1
+fi
+
+# Copy log files from the container to the host
+docker cp "${container_id}:/root/iperf3_generator.log" "${iperf_logfile}"
+docker cp "${container_id}:/root/ditg_generator.log" "${ditg_logfile}"
