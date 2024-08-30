@@ -12,3 +12,5 @@
 [mergetool]
 	prompt = true
 	trustExitCode = false
+[credential "https://github.com"]
+	helper = store --file ~/gitcredentials
