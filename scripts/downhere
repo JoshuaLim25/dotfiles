@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Simpl script to copy most recently downloaded file
+# to the cwd
+
+# -A for all but ./ and ../
+# -r for reversed output
+# -t for sorted by time, newest first
+down_file="$(ls -Art ~/Downloads | tail -n1)"
+
+if [[ -z "$down_file" ]]; then
+    echo "No new downloaded files"
+    exit 42
+fi
+
+file_path="$HOME/Downloads/$down_file"
+
+if [[ $# -eq 0 ]]; then
+    dest="."
+elif [[ $# -eq 1 ]]; then
+    dest="$1"
+else
+    echo "Expected at most one argument for dest file path"
+    exit 42
+fi
+
+mv "${file_path}" "$dest"
+echo "Moved '$file_path' to '$dest'"

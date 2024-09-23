@@ -13,4 +13,4 @@
 	prompt = true
 	trustExitCode = false
 [credential "https://github.com"]
-	helper = store --file ~/gitcredentials
+	helper = store --file ~/.dotfiles/gitcredentials

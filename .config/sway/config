@@ -272,6 +272,7 @@ assign [class="Spotify"] workspace number 2
 assign [app_id="kitty"] workspace number 3
 assign [class="discord"] workspace number 4
 assign [class="obsidian"] workspace number 8
+assign [app_id="zathura"] workspace number 9
 
 # Workspace switching
 # bindsym $mod+1 workspace number 1
@@ -282,6 +283,7 @@ exec kitty
 exec obsidian
 exec dunst &
 exec wlsunset -S 05:30 -s 18:30 -t 3000
+exec_always pkill kanshi; exec kanshi
 
 # Screenshots
 bindsym Print exec grim -g "$(slurp)" - | wl-copy

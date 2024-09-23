@@ -120,7 +120,7 @@ abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
-abbrev-alias cdgit="cd ~/Documents/playground/"
+abbrev-alias cdgit="cd ~/Documents/git-playground/"
 # Project-specific
 abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
 abbrev-alias cdlogs="cd ~/research-projects/iperf3-logs/"
@@ -149,13 +149,16 @@ alias ls='ls --color'
 alias ll='ls -lh --color'
 alias grep='rg'
 alias vim='nvim'
-alias rm="rm -I" # safety with rm
-alias ip="ip --color=auto"
+alias rm='rm -I' # safety with rm
+alias ip='ip --color=auto'
 alias vimdiff='nvim -d'
+alias py='python3'
+alias pd='pushd'
 
 # Aliased refs
 alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
 alias refcron="nvim ~/spaghetti/tools/cron.sh"
+alias refmake="nvim ~/spaghetti/tools/Makefile"
 
 # Shell integrations
 eval "$(fzf --zsh)"

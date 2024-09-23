@@ -24,7 +24,7 @@ return {
         HACK = { icon = ' ', color = 'warning' },
         WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
         PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
-        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
+        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO', 'ASSUMPTION' } },
         TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
       },
       -- list of named colors where we try to extract the guifg from the

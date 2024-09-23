@@ -1,7 +1,8 @@
 . "$HOME/.cargo/env"
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-# RUST_BACKTRACE=1
+export RUST_BACKTRACE=1
+export DOCKER_BUILDKIT=1
 
 # See https://web.archive.org/web/20210506080335/https://mah.everybody.org/docs/ssh and https://stackoverflow.com/questions/18880024/start-ssh-agent-on-login
 # SSH_ENV="$HOME/.ssh/ssh-agent-env"

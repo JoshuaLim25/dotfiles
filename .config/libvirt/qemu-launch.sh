@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # see https://drewdevault.com/2018/09/10/Getting-started-with-qemu.html
 qemu-system-x86_64 \

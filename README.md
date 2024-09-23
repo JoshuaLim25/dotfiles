@@ -75,6 +75,9 @@
 - `meson`
 - `openbsd-netcat`
 - `bc`
+- `libscfg`
+- `libvarlink`
+- `kanshi`
 
 ## Sway
 
