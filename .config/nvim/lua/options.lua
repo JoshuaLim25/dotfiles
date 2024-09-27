@@ -51,10 +51,6 @@ o.signcolumn = 'yes'
 -- Decrease update time
 o.updatetime = 250
 
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-o.timeoutlen = 300
-
 -- Configure how new splits should be opened
 o.splitright = true
 o.splitbelow = true
@@ -78,7 +74,7 @@ o.scrolloff = 999
 -- Other QOL stuff
 o.smartindent = true
 o.swapfile = false
-o.timeoutlen = 90 -- time to wait for a mapped sequence to complete (in milliseconds)
+o.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
 -- If this many milliseconds nothing is typed the swap file will be written to disk
 o.updatetime = 100 -- faster completion (4000ms default)
 o.numberwidth = 2 -- set number column width to 2 {default 4}

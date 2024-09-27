@@ -151,29 +151,6 @@ return {
           -- Disabling LSP semantic token highlighting
           -- client.server_capabilities.semanticTokensProvider = nil
 
-          -- Toggle LSP for a given servier
-          -- local function toggle_ltex()
-          --   local buf_clients = vim.lsp.get_clients { bufnr = 0 }
-          --   for _, _client in pairs(buf_clients) do
-          --     if _client.name == 'ltex' then
-          --       _client.stop()
-          --       return
-          --     end
-          --   end
-          --   vim.cmd 'LspStart ltex'
-          -- end
-          -- local function toggle_rust_analyzer()
-          --   local buf_clients = vim.lsp.get_clients { bufnr = 0 }
-          --   for _, _client in pairs(buf_clients) do
-          --     if _client.name == 'rust_analyzer' then
-          --       _client.stop()
-          --       return
-          --     end
-          --   end
-          --   vim.cmd 'LspStart rust_analyzer'
-          -- end
-          -- map('<leader>tl', toggle_rust_analyzer(), '[T]oggle [L]sp')
-
           -- Toggle LSP Diagnostics
           local diagnostics_active = true
           vim.keymap.set('n', '<leader>td', function()

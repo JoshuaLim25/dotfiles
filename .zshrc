@@ -124,6 +124,9 @@ abbrev-alias cdgit="cd ~/Documents/git-playground/"
 # Project-specific
 abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
 abbrev-alias cdlogs="cd ~/research-projects/iperf3-logs/"
+abbrev-alias cdbug="cd ~/buildkit/control/gateway/"
+abbrev-alias s="source development.env && source seedenv/bin/activate"
+
 
 ## Git
 abbrev-alias g="git "
@@ -144,21 +147,27 @@ abbrev-alias dcup="docker-compose up"
 abbrev-alias za="zathura"
 
 # Aliases
+# Shell
 alias c='clear'
 alias ls='ls --color'
 alias ll='ls -lh --color'
+alias rm='rm -I' # safety
+alias mv='mv -I' # safety
 alias grep='rg'
 alias vim='nvim'
-alias rm='rm -I' # safety with rm
 alias ip='ip --color=auto'
+
+# "QOL"
 alias vimdiff='nvim -d'
 alias py='python3'
 alias pd='pushd'
+alias todo='nvim ~/TODO.md'
 
-# Aliased refs
+# References
 alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
 alias refcron="nvim ~/spaghetti/tools/cron.sh"
 alias refmake="nvim ~/spaghetti/tools/Makefile"
+alias refdocker="nvim ~/spaghetti/tools/docker-ref.md"
 
 # Shell integrations
 eval "$(fzf --zsh)"

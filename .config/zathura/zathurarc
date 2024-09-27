@@ -10,8 +10,27 @@ set window-height 1080
 map <Space> toggle_index
 map K zoom in
 map J zoom out
-map p print
 map w recolor
+
+######
+# USETHIS: map c copy_link
+map u scroll half-up
+map d scroll half-down
+map p toggle_page_mode
+map r reload
+map R rotate
+map J zoom in
+map K zoom out
+# map i recolor
+map P print
+
+set highlight-transparency .1
+set zoom-center "true"
+set sandbox none
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 1
+######
 
 set notification-error-bg       "#ebdbb2" # bg
 set notification-error-fg       "#9d0006" # bright:red

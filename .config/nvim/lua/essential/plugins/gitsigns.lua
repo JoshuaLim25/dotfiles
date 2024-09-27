@@ -50,6 +50,8 @@ return {
         end, { desc = 'reset git hunk' })
         -- normal mode
         map('n', '<leader>gs', gitsigns.stage_hunk, { desc = '[g]it [s]tage hunk' })
+        map('n', '<leader>gj', gitsigns.next_hunk, { desc = '[g]it next [j] hunk' })
+        map('n', '<leader>gk', gitsigns.prev_hunk, { desc = '[g]it prev [k] hunk' })
         map('n', '<leader>gr', gitsigns.reset_hunk, { desc = '[g]it [r]eset hunk' })
         map('n', '<leader>gS', gitsigns.stage_buffer, { desc = '[g]it [S]tage buffer' })
         map('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = '[g]it [u]ndo stage hunk' })
