@@ -1,0 +1,226 @@
+# use UTF8
+# set -g utf8
+# set-window-option -g utf8 on
+
+# make tmux display things in 256 colors
+set -g default-terminal "screen-256color"
+set-window-option -g xterm-keys on
+
+#set -g default-terminal "xterm-256color"
+#set -g default-terminal "xterm"
+
+# set scrollback history to 10000 (10k)
+set -g history-limit 10000
+
+# set Ctrl-a as the default prefix key combination
+# and unbind C-b to free it up
+set -g prefix C-a
+unbind C-b
+
+# use send-prefix to pass C-a through to application
+bind C-a send-prefix
+
+# shorten command delay
+set -sg escape-time 1
+
+# set window and pane index to 1 (0 by default)
+set-option -g base-index 1
+setw -g pane-base-index 1
+
+# reload ~/.tmux.conf using PREFIX r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# use PREFIX | to split window horizontally and PREFIX - to split vertically
+bind | split-window -h
+bind - split-window -v
+
+# Make the current window the first window
+bind T swap-window -t 1
+
+# map Vi movement keys as pane movement keys
+bind j select-pane -L
+bind k select-pane -D
+bind i select-pane -U
+bind l select-pane -R
+
+# and use C-h and C-l to cycle thru panes
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+# resize panes using PREFIX H, J, K, L
+bind H resize-pane -L 5
+bind J resize-pane -D 5
+bind K resize-pane -U 5
+bind L resize-pane -R 5
+
+# quick pane cycling
+unbind-key F9 
+bind-key -n F9 select-pane -t :.+
+
+# explicitly disable mouse control
+set -g mouse on
+# setw -g mode-mouse on
+# set -g mouse-select-pane on
+# set -g mouse-resize-pane off
+# set -g mouse-select-window on
+
+
+
+
+## ---------------------
+## Copy & Paste
+## ---------------------
+
+
+# Update: Dec 26, 2019 
+### For regular copy-paste from tmux buffer to tmux buffer/outside
+# 1. Press `C-a + [` to go into copy mode
+# 2. Press `v` to start selection and select text on the screen/terminal. 
+#   Note tmux copy mode is oblivious to the current program (e.g., vim), so it 
+#   cannot trigger the program to scroll. SO YOU CAN ONLY SELECT TEXTS FROM THE
+#   TERMINAL SCREEN.
+# 3. Press `y` to copy and exit copy mode.
+#   Option 2: `C-a + y` to copy and press ENTER to exit copy mode.
+# 4. Press `C-a + ]` to paste the content to anywhere inside TMUX (including other 
+#   program, e.g., vim). For pasting outside of tmux, 
+#   you may have to use `mouse right-click and paste` if `xsel -b` is used.
+#   In most of the applications, `ctrl+v` works fine. For terminal, you have to 
+#   use `ctrl+shift+v`, not `shift+ins` (which reads from primary buffer, not clipboard)
+
+# Use `prefix + #` to see the current tmux buffer
+
+
+# The followings are tmux copy mode working like vim keys (v, y)
+# BUT NOT TO COPY FROM VIM TO TMUX/clipboard
+# use vim style keybindings in copy mode
+set-window-option -g mode-keys vi
+
+## setup 'v' to begin selection as in Vim
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+
+# For coying to tmux buffer and moving to clipboard from 
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xsel -i -b" \; display "Copied to clipboard"
+
+# Copy from clipboard (including, outside stuff) to tmux paste buffer
+bind v run "tmux set-buffer -- \"$(xsel -o -b)\"; tmux paste-buffer"
+
+# (Option 2:) For moving tmux copy buffer (copied by mouse) to X clipboard 
+# Press C-a and then y
+bind y run "tmux save-buffer - | xsel -i -b" \; display "Copied to clipboard"
+
+
+#==============================================================================
+
+
+# "reattach-to-user-namespace pbcopy"
+
+# for moving to primary
+# bind-key -T vi-copy 'y' copy-pipe "xsel -i -p" 
+#
+#bind-key -T copy-mode-vi 'y' copy-pipe "xsel -i -b"
+# bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xclip -selection clip -i"
+
+
+
+##### ---------------------
+##### Copy & Paste
+##### ---------------------
+##### provide access to the clipboard for pbpaste, pbcopy
+####set-option -g default-command "reattach-to-user-namespace -l zsh"
+####set-window-option -g automatic-rename on
+####
+##### use vim keybindings in copy mode
+#### #setw -g mode-keys vi
+###set-window-option -g mode-keys vi
+####
+##### setup 'v' to begin selection as in Vim
+###bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+###
+#### bind-key -T vi-copy enter copy-selection
+###
+#### For moving to clipboard from inside vim
+#### bind-key -T copy-mode-vi 'y' copy-pipe "xsel -i -b" 
+###bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+###
+#### for moving to primary
+#### bind-key -T vi-copy 'y' copy-pipe "xsel -i -p" 
+####
+#####For moving tmux copy buffer (copied by mouse) to X clipboard 
+#### Press C-a and then y
+###bind y run "tmux save-buffer - | xsel -i -b" \; display "Copied to clipboard"
+###
+#### Copy clipboard to tmux paste buffer
+###bind v run "tmux set-buffer -- \"$(xsel -o -b)\"; tmux paste-buffer"
+
+# ----------------------
+# set some pretty colors
+# ----------------------
+# set pane colors - hilight the active pane
+set-option -g pane-border-fg green #colour235 #base02
+set-option -g pane-active-border-fg yellow #colour240 #base01
+
+# colorize messages in the command line
+set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange
+
+# ----------------------
+# Status Bar
+# -----------------------
+set-option -g status on                # turn the status bar on
+# set -g status-utf8 on                  # set utf-8 for the status bar
+set -g status-interval 60               # set update frequencey (default 15 seconds)
+set -g status-justify centre           # center window list for clarity
+# set-option -g status-position top    # position the status bar at top of screen
+
+# visual notification of activity in other windows
+setw -g monitor-activity on
+set -g visual-activity on
+
+# set color for status bar
+set-option -g status-bg colour235 #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr dim 
+
+# set window list colors - red for active and cyan for inactive
+set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg colour236
+set-window-option -g window-status-attr dim
+
+set-window-option -g window-status-current-fg  brightred #orange
+set-window-option -g window-status-current-bg colour236
+set-window-option -g window-status-current-attr bright
+
+# show host name and IP address on left side of status bar
+set -g status-left-length 70
+#set -g status-left "#[fg=green]: #h : #[fg=brightblue]#(curl icanhazip.com) #[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
+set -g status-left "#[fg=green]: #h : "
+
+# show session name, window & pane number, date and time on right side of
+# status bar
+set -g status-right-length 60
+#set -g status-right "#[fg=blue]#S #I:#P #[fg=yellow]:: %d %b %Y #[fg=green]:: %l:%M :: #(date -u | awk '{print $4}')::"
+set -g status-right "#[fg=cyan]#S #I:#P #[fg=yellow]:: %d %b %Y #[fg=green]:: %l:%M %p::"
+
+
+## Trigger autoread in vim
+set -g focus-events on
+
+
+##***** Tmux Plugin Manager (TPM)
+##==============================
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+
+## Tmux resurrect plugin to save and restore tmux session across reboot
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+## Enable capture of panes
+set -g @resurrect-capture-pane-contents 'on'
+
+## Tmux auto save and auto restore tmux-resurrect session
+## Check out https://github.com/tmux-plugins/tmux-continuum
+
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux-plugins/tpm/tpm'

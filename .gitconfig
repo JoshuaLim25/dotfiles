@@ -14,3 +14,26 @@
 	trustExitCode = false
 [credential "https://github.com"]
 	helper = store --file ~/.dotfiles/gitcredentials
+
+
+; [user]
+;         email = endadulhoque@gmail.com
+;         name = Endadul Hoque
+; [core]
+;         editor = vim
+; [merge]
+;         tool = meld
+;         conflictstyle = diff3
+; [alias]
+;         co = checkout
+;         br = branch
+;         ci = commit
+;         st = status
+;         unstage = reset HEAD --
+;         last = log -1 HEAD
+;
+; [diff]
+;         renamelimit = 15000
+;
+; [push]
+;         default = simple

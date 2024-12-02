@@ -111,7 +111,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Abbreviations
 source ~/.dotfiles/scripts/abbrev-alias.sh
-abbrev-alias cat='bat'
 abbrev-alias v='nvim'
 abbrev-alias getmeout="shutdown -h now"
 
@@ -123,8 +122,8 @@ abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
 abbrev-alias cdgit="cd ~/Documents/git-playground/"
 # Project-specific
 abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
-abbrev-alias cdlogs="cd ~/research-projects/iperf3-logs/"
-abbrev-alias cdbug="cd ~/buildkit/control/gateway/"
+abbrev-alias cdlogs="cd /home/josh/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator/logs"
+abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
 abbrev-alias s="source development.env && source seedenv/bin/activate"
 
 
@@ -139,35 +138,48 @@ abbrev-alias gd="git diff"
 abbrev-alias gl="git log --oneline --graph --decorate"
 abbrev-alias gr="git restore --staged"
 abbrev-alias gra="git restore --staged ."
+abbrev-alias gcls="git clone git@github.com:"
 
 ## Docker
-abbrev-alias dc="docker-compose"
-abbrev-alias dcbuild="docker-compose build"
-abbrev-alias dcup="docker-compose up"
+abbrev-alias dc="docker compose"
+abbrev-alias dcbuild="docker compose build"
+abbrev-alias dcup="docker compose up"
+# See https://docs.docker.com/reference/cli/docker/compose/up/ for more
+abbrev-alias dcups="docker compose up --remove-orphans --abort-on-container-failure"
 abbrev-alias za="zathura"
+
+# Tmux
+abbrev-alias t="tmux"
+abbrev-alias tnew="tmux new -s"
 
 # Aliases
 # Shell
 alias c='clear'
 alias ls='ls --color'
 alias ll='ls -lh --color'
+alias cat='bat'
 alias rm='rm -I' # safety
-alias mv='mv -I' # safety
+alias mv='mv -i' # safety
 alias grep='rg'
 alias vim='nvim'
 alias ip='ip --color=auto'
+alias grrep='grep -R'
 
 # "QOL"
-alias vimdiff='nvim -d'
+alias vdiff='nvim -d'
 alias py='python3'
 alias pd='pushd'
 alias todo='nvim ~/TODO.md'
 
 # References
 alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
+alias refjson="nvim ~/spaghetti/tools/json.md"
 alias refcron="nvim ~/spaghetti/tools/cron.sh"
 alias refmake="nvim ~/spaghetti/tools/Makefile"
 alias refdocker="nvim ~/spaghetti/tools/docker-ref.md"
+alias refgit="nvim ~/spaghetti/tools/git.md"
+alias refvim="nvim ~/spaghetti/tools/vim.md"
+alias refcpp="nvim ~/spaghetti/langs/c++/ref.md"
 
 # Shell integrations
 eval "$(fzf --zsh)"

@@ -11,41 +11,14 @@ PS1="\w > "
 PATH="$HOME/.local/bin:$PATH"
 
 
-# aliases i put in
-# make it so typing vim doesn't fuck you
-alias vim="nvim"
-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
-alias cdsystems="cd ~/Documents/cis-384/"
-alias cdtest="cd ~/spaghetti/test/"
-alias updatewhat="apt list --upgradable"
-alias grep="ripgrep"
-
-
-# View Git status.
-alias gs='git status'
-# Add a file to Git.
-alias ga='git add'
-# Add all files to Git.
-alias gaa='git add --all'
-# Commit changes to the code.
-alias gc='git commit'
-# View the Git log.
-alias gl='git log --pretty=oneline'
-# Create a new Git branch and move to the new branch at the same time. 
-alias gb='git checkout -b'
-# View the difference.
-alias gd='git diff'
-
-
-# safety with rm
-alias rm="rm -I"
-
-# shutdown computer
-alias getmeout="shutdown -h now"
-
 # enables you to use vim motions in the command line
-# nvm
-set -o emacs
+# https://unix.stackexchange.com/questions/303282/in-bash-vi-mode-map-jk-to-exit-insert-mode
+set -o vi
+bind '"jk":vi-movement-mode'
+# bind '"jk":"\e"'
+set show-mode-in-prompt on
+set vi-ins-mode-string "+"
+set vi-cmd-mode-string ":"
 
 # I liked some of these themes from ohmybash:
 # OSH_THEME="purity"
@@ -170,7 +143,6 @@ fi
 
 # changing prompt
 PS1=${THEME_PROMPT_CHAR_PS1:-"❯ "}
-
 
 #nvim libstdc++.6 fix, with treesitter fucking up
 export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH

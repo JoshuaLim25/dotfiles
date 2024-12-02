@@ -78,6 +78,7 @@
 - `libscfg`
 - `libvarlink`
 - `kanshi`
+- `ed`
 
 ## Sway
 
@@ -95,6 +96,8 @@
 - `wayland-protocols`
 - `ly`
 - `wtype`
+- `swaylock`
+- `swayidle`
 
 # Post Install TODOs:
 

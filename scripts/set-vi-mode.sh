@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # NOTE: bindkey alone displays or modifies key bindings in the current keymap.
 # Using bindkey -M lets you specify which keymap you’re working with.
 

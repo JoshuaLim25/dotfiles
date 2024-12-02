@@ -163,6 +163,7 @@ return {
             au VimEnter * :silent !kitty @ set-spacing padding=0 margin=0 3 0 3
             augroup END
           ]]
+
           -- -- Toggle LSP Diagnostics
           -- BUG: something's fishy, use <leader>dd, in ../../keymaps.lua
           -- local diagnostics_active = true
@@ -181,11 +182,13 @@ return {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, { desc = '[W]orkspace [L]ist Folders' })
 
-          vim.keymap.set('n', '<leader>R', '<cmd>w<cr><cmd>e!<cr>', { desc = '[R]efresh' })
+          vim.keymap.set('n', keys, func, { desc = desc })
+          vim.keymap.set('n', keys, func, { desc = desc })
 
-          -- vim.keymap.set('n', keys, func, { desc = desc })
-
-          -- NOTE: END OF AUTOCOMMANDS
+          --
+          --
+          --
+          -- END OF AUTOCOMMANDS
         end,
       })
 

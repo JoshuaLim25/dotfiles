@@ -1,8 +1,13 @@
--- Here is a more advanced example where we pass configuration
--- options to `gitsigns.nvim`. This is equivalent to the following Lua:
+-- NOTE: YOU SHOULD HAVE THIS PLUGIN.
+--
+-- Here we pass configuration options to `gitsigns.nvim`.
+-- This is equivalent to the following Lua:
 --    require('gitsigns').setup({ ... })
 --
+-- Adds git related signs to the gutter, as well as utilities for managing changes-
 -- See `:help gitsigns` to understand what the configuration keys do
+-- NOTE: gitsigns is already included in init.lua but contains only the base
+-- config. This will add also the recommended keymaps.
 return {
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -56,7 +61,7 @@ return {
         map('n', '<leader>gS', gitsigns.stage_buffer, { desc = '[g]it [S]tage buffer' })
         map('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = '[g]it [u]ndo stage hunk' })
         map('n', '<leader>gR', gitsigns.reset_buffer, { desc = '[g]it [R]eset buffer' })
-        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = '[g]it [p]review hunk' })
+        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = '[g]it [p]review hunk (diff)' })
         map('n', '<leader>gb', gitsigns.blame_line, { desc = '[g]it [b]lame line' })
         map('n', '<leader>gd', gitsigns.diffthis, { desc = '[g]it [d]iff against index' })
         map('n', '<leader>gD', function()
