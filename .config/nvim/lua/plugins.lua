@@ -40,10 +40,11 @@ require('lazy').setup({
   -- require 'essential/plugins/colorschemes/color-scheme-kanagawa-paper',
   -- require 'essential/plugins/colorschemes/color-scheme-kanagawa-handmade.lua',
 
-  require 'essential/plugins/colorschemes/color-scheme-kanagawa',
+  -- require 'essential/plugins/colorschemes/color-scheme-kanagawa',
 
   -- CUSTOM
-  -- require 'essential/plugins/colorschemes/color-scheme-handmade-hybrid',
+  -- require 'essential/plugins/colorschemes/handmade-hybrid',
+  require 'essential/plugins/colorschemes/kanagawa_v2',
 
   require 'essential/plugins/todo-comments',
 

@@ -314,6 +314,14 @@ bindsym Print exec grim -g "$(slurp)" - | wl-copy
 # bindsym Print exec grim ~/Pictures/Screenshot-$(date +%Y%m%d-%H%M%S).png
 
 
+# [[ BLUETOOTH ]] {{
+exec bluetoothctl trust BC:87:FA:BB:97:66
+exec bluetoothctl power on
+exec bluetoothctl connect BC:87:FA:BB:97:66
+# }}
+
+
+
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.

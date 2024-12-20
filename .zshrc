@@ -109,7 +109,21 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Abbreviations
+##### Helper Functions #####
+# # https://stackoverflow.com/questions/1314334/easy-way-to-create-a-file-nested-in-unavailable-directories/1314345#1314345
+# mktouch {
+#   mkdir -p "$(dirname $1)"
+#   touch "$1"
+# }
+# # https://superuser.com/questions/1412808/add-function-to-zsh
+# docker-clean() {
+#   docker stop "$(docker ps -a -q)"
+#   docker rm "$(docker ps -a -q)"
+#   docker rmi "$(docker images -q)"
+#   docker volume prune
+# }
+
+##### Abbreviations #####
 source ~/.dotfiles/scripts/abbrev-alias.sh
 abbrev-alias v='nvim'
 abbrev-alias getmeout="shutdown -h now"
@@ -125,7 +139,7 @@ abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_tr
 abbrev-alias cdlogs="cd /home/josh/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator/logs"
 abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
 abbrev-alias s="source development.env && source seedenv/bin/activate"
-
+abbrev-alias lsout='ls ./output | wc -l'
 
 ## Git
 abbrev-alias g="git "
@@ -152,7 +166,7 @@ abbrev-alias za="zathura"
 abbrev-alias t="tmux"
 abbrev-alias tnew="tmux new -s"
 
-# Aliases
+##### Aliases #####
 # Shell
 alias c='clear'
 alias ls='ls --color'
@@ -161,18 +175,25 @@ alias cat='bat'
 alias rm='rm -I' # safety
 alias mv='mv -i' # safety
 alias grep='rg'
-alias vim='nvim'
+# alias vim='nvim'
 alias ip='ip --color=auto'
-alias grrep='grep -R'
+alias echopath='echo $PATH | tr ":" "\n"'
 
 # "QOL"
 alias vdiff='nvim -d'
 alias py='python3'
 alias pd='pushd'
 alias todo='nvim ~/TODO.md'
+alias hk='nvim ~/hotkeys_im_learning.md'
+alias sc='shellcheck'
+# https://www.reddit.com/r/golang/comments/uzrbw3/best_practice_do_you_use_the_go_compiler_from/
+alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.linux-amd64.tar.gz | sudo tar zx -C /usr/local/ go'
+alias btconnect='bluetoothctl connect BC:87:FA:BB:97:66'
 
 # References
 alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
+alias bbash="nvim ~/spaghetti/langs/bash/bad_bash.sh"
+alias refvm="nvim ~/spaghetti/tools/vm-ref.md"
 alias refjson="nvim ~/spaghetti/tools/json.md"
 alias refcron="nvim ~/spaghetti/tools/cron.sh"
 alias refmake="nvim ~/spaghetti/tools/Makefile"

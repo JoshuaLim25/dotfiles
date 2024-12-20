@@ -1,5 +1,7 @@
+# Add Rust, Go to $PATH
 . "$HOME/.cargo/env"
-export PATH="$PATH:$(go env GOPATH)/bin"
+# export PATH="$PATH:$(go env GOPATH)/bin"
+# export PATH=$PATH:/usr/local/go/bin
 
 export RUST_BACKTRACE=1
 export DOCKER_BUILDKIT=1

@@ -79,6 +79,8 @@
 - `libvarlink`
 - `kanshi`
 - `ed`
+- `bluez`
+- `bluez-utils`
 
 ## Sway
 
@@ -115,6 +117,13 @@
 - Clone the associate git repo, `cd` into it, and run `makepkg -si`
 - `sudo chown -R  josh:users yay`
 - `sudo git clone https://aur.archlinux.org/yay.git`
+
+
+#### AUR Packages
+
+- Install these with `yay -S <pkg>`:
+- `shellcheck-bin`
+
 
 ## Ly
 

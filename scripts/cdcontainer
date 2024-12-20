@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Enter the name of the container:"
+read -r container_name
+# container_id="$(docker ps -a | grep iperf-generator | awk '{print $1}')"
+container_id=$(docker ps -a --filter "name=${container_name}" --format "{{.ID}}")
+if [ -z "$container_id" ]; then
+    echo "No such container found, sorry"
+    exit 42
+fi
+docker exec -it "$container_id" /bin/sh

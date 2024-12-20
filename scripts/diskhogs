@@ -9,4 +9,4 @@ case $# in
   exit 1;;
 esac
 
-du -sh --one-file-system ${dir}/* ${dir}/.[A-Za-z0-9] | sort -hr | head
+du -sh --one-file-system "${dir}"/* "${dir}"/.[A-Za-z0-9] | sort -hr | head

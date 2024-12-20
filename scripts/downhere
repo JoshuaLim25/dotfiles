@@ -26,5 +26,5 @@ else
     exit 42
 fi
 
-mv "${file_path}" "$dest"
+mv -i "${file_path}" "$dest"
 echo "Moved '$file_path' to '$dest'"

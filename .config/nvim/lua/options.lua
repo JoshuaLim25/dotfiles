@@ -1,12 +1,8 @@
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
+-- Relevant help pages - `:help vim.opt`, `:help option-list`
 --  NOTE: shorthand
 local o = vim.opt
 
--- MISCELLANEOUS
+-- [[ ESSENTIAL ]] {{
 -- sync os clipboard with nvim
 o.clipboard = 'unnamedplus'
 -- visual block mode cool behavior
@@ -25,26 +21,30 @@ o.conceallevel = 0 -- so that `` is visible in markdown files
 -- o.fileencoding = 'utf-8' -- the encoding written to a file
 -- o.autoindent = true -- copy indent from current line when starting new one
 -- o.formatoptions:remove { 'c', 'r', 'o' } -- don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode.
+-- }}
 
--- LINE NUMBERS
+-- [[ LINE NUMBERS ]] {{
 o.number = true
 o.relativenumber = true
+-- }}
 
--- TAB STUFF
+-- [[ TAB STUFF ]] {{
 o.expandtab = true -- tabs -> spaces
 o.numberwidth = 1 -- set number column width to 2 {default 4}
 o.shiftwidth = 4 -- the number of spaces inserted for each indentation
 o.tabstop = 4 -- insert n spaces for a tab
 o.softtabstop = 4 -- Number of spaces that a tab counts for while performing editing operations
+-- }}
 
--- line wrap behavior
+-- [[ LINE WRAP ]] {{
 o.wrap = true -- false makes long long lines go offscreen
 -- o.sidescrolloff = 8 -- minimal number of screen columns either side of cursor (if wrap is `false`)
 o.linebreak = true -- companion to wrap, don't split words
 o.breakindent = true -- enabling will ,keep lines visually indented (same amount of space as the beginning of that line), thus preserving horizontal blocks of text.
 -- o.whichwrap = 'bs<>[]hl' -- which "horizontal" keys you allow to goto prev/next line
+-- }}
 
--- MORE USEFUL DIFFS (nvim -d)
+-- [[ MORE USEFUL DIFFS ]] {{
 --- by ignoring whitespace
 o.diffopt:append 'iwhite'
 --- and using a smarter algorithm
@@ -53,6 +53,7 @@ o.diffopt:append 'iwhite'
 --- https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 o.diffopt:append 'algorithm:histogram'
 o.diffopt:append 'indent-heuristic'
+-- }}
 
 -- SEARCHING
 -- highlight on search, clear on pressing <Esc> in normal mode

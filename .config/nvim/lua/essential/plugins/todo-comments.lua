@@ -7,10 +7,10 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       -- Show todo comments in the sign column but don't highlight the text
-      -- highlight = {
-      --   -- keyword = '',
-      --   after = '',
-      -- },
+      highlight = {
+        -- keyword = '',
+        after = '',
+      },
       signs = false,
       -- keywords recognized as todo comments
       keywords = {
@@ -20,12 +20,12 @@ return {
           alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'BAD' }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
-        TODO = { icon = ' ', color = 'info', alt = { 'INFO' } },
+        TODO = { icon = ' ', color = 'info', alt = { 'INFO', 'RECALL' } },
         HACK = { icon = ' ', color = 'warning' },
         WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
         PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
         NOTE = { icon = ' ', color = 'hint', alt = { 'ASSUMPTION' } },
-        TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED', 'WHY', 'GIVEN', 'HOW', 'EG', 'NEW' } },
+        TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED', 'WHY', 'GIVEN', 'HOW', 'EG', 'NEW', 'INSIGHT' } },
       },
       -- list of named colors where we try to extract the guifg from the
       -- list of highlight groups or use the hex color if hl not found as a fallback

@@ -93,8 +93,8 @@ return {
 
             -- popular plugins that open floats will link to normalfloat by default;
             -- set their background accordingly if you wish to keep them dark and borderless
-            -- lazynormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-            -- masonnormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            lazynormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            masonnormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 
             pmenu = {
               fg = theme.ui.shade0,
