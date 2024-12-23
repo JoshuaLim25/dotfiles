@@ -1,5 +1,11 @@
-# https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html?ref=tamerlan.dev
+# src: https://www.gnu.org/software/stow/manual/stow.html#Ignore-Lists
 # Comments and blank lines are allowed.
+
+# stow -v --target=$HOME --no-folding misc/*
+# -v: verbose output
+# --target=$HOME: Specifies the target directory (your $HOME directory).
+# --no-folding: Prevents Stow from creating symlinks to directories.
+# misc/*: Stows the contents of misc (each individual file inside misc).
 
 RCS
 .+,v
@@ -22,3 +28,11 @@ _darcs
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
+
+# Ignore scripts, already a symlink from `~/.local/bin/scripts`
+# see: `export PATH=$PATH:~/.local/bin/scripts` in `~/.zshrc`
+^scripts/
+
+# Ignore markdown and backup files
+\.md$
+\.bak$

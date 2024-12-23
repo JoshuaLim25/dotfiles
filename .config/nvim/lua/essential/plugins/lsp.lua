@@ -207,6 +207,9 @@ return {
               enable = false,
             },
           },
+          check = {
+            command = 'clippy',
+          },
         },
         -- [[ PYTHON ]] {{
         -- https://www.reddit.com/r/neovim/comments/1cpkeqd/help_needed_with_python_lsp/
@@ -219,8 +222,10 @@ return {
               analysis = {
                 -- ignore = { "*" },
                 typeCheckingMode = 'standard',
-                diagnosticMode = 'openFilesOnly',
+                -- diagnosticMode = 'openFilesOnly',
+                diagnosticMode = 'workspace',
                 useLibraryCodeForTypes = true,
+                autoSearchPaths = true,
               },
             },
           },

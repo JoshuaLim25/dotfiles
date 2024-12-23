@@ -5,10 +5,10 @@ return {
     build = ':TSUpdate',
     opts = {
       ensure_installed = { 'bash', 'c', 'cpp', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'rust', 'python', 'go' },
-      -- Autoinstall languages that are not installed
       auto_install = true,
+      matchup = { enable = true },
       highlight = {
-        enable = true,
+        enable = true, -- false disables entire extension
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         -- If you are experiencing weird indenting issues, add the language to
         -- the list of additional_vim_regex_highlighting and disabled languages for indent.
@@ -24,6 +24,7 @@ return {
           node_decremental = '<leader>sd',
         },
       },
+      -- See this: https://github.com/rebelot/dotfiles/blob/195cfeb05d036c759eb75a9535be86aaceed1493/nvim/lua/treesitter-config.lua
       textobjects = {
         select = {
           enable = true,
@@ -36,10 +37,15 @@ return {
             ['af'] = '@function.outer',
             ['if'] = '@function.inner',
             ['ac'] = '@class.outer',
-            -- You can optionally set descriptions to the mappings (used in the desc parameter of
-            -- nvim_buf_set_keymap) which plugins like which-key display
-            ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
-            -- You can also use captures from other query groups like `locals.scm`
+            ['ic'] = '@class.inner',
+            ['al'] = '@loop.outer',
+            ['il'] = '@loop.inner',
+            ['ik'] = '@block.inner',
+            ['ak'] = '@block.outer',
+            ['ia'] = '@parameter.inner',
+            ['aa'] = '@parameter.outer',
+            ['i='] = '@assignment.inner',
+            ['a='] = '@assignment.outer',
             ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
           },
           -- You can choose the select mode (default is charwise 'v')

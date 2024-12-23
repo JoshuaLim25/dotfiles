@@ -1,92 +1,68 @@
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+-- [[ BOOTSTRAP `lazy.nvim` PLUGIN MANAGER ]] {{
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
   vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
+-- }}
 
--- [[ Configure and install plugins here ]]
+-- [[ PLUGIN CONFIG AND INSTALL ]] {{
 require('lazy').setup({
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-
+  -- NOTE: you can add in other plugins with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to force a plugin to be loaded.
-  --  This is equivalent to:
-  --    require('Comment').setup({})
-
+  -- INFO: can also add them using a table, with the first argument being the link
+  -- and the following keys being used to configure plugin behavior/loading/etc.
+  -- INFO: Use `opts = {}` to force a plugin to be loaded.
+  -- This would be EQUIVALENT to `require('Comment').setup({})`
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- modular approach: using `require 'path/name'` will
-  -- include a plugin definition from file lua/path/name.lua
-
+  -- Include plugin definition from file `lua/path/name.lua`
   require 'essential/plugins/gitsigns',
-
   require 'essential/plugins/telescope',
-
-  require 'essential/plugins/lspconfig',
-
+  require 'essential/plugins/lsp',
   require 'essential/plugins/conform',
-
   require 'essential/plugins/cmp',
-
-  -- WEIRD:
-  -- require 'essential/plugins/colorschemes/color-scheme-kanagawa-paper',
-  -- require 'essential/plugins/colorschemes/color-scheme-kanagawa-handmade.lua',
-
-  -- require 'essential/plugins/colorschemes/color-scheme-kanagawa',
-
-  -- CUSTOM
-  -- require 'essential/plugins/colorschemes/handmade-hybrid',
-  require 'essential/plugins/colorschemes/kanagawa_v2',
-
   require 'essential/plugins/todo-comments',
-
   require 'essential/plugins/mini',
-
   require 'essential/plugins/treesitter',
-
-  require 'essential.plugins.lint',
-
-  require 'essential.plugins.autopairs',
-
-  require 'essential.plugins.neo-tree',
-
-  -- NOTE: to use these just uncomment them and
-  -- mv the respective files from .bak to .lua
-
+  require 'essential/plugins/which-key',
+  require 'essential/plugins/lint',
+  require 'essential/plugins/autopairs',
+  -- [[ COLORSCHEMES ]] {{
+  -- require 'essential/plugins/colorschemes/kanagawa.lua',
+  -- require 'essential/plugins/colorschemes/handmade-hybrid.lua',
+  -- require 'essential/plugins/colorschemes/kanagawa-handmade.lua',
+  require 'essential/plugins/colorschemes/kanagawa_v2',
+  -- }}
+  -- NOTE: NOT USING CURRENTLY
+  -- remember to mv them from .bak -> .lua
+  -- require 'essential.plugins.neo-tree',
   -- require 'essential.plugins.indent_line',
-
   -- require 'essential.plugins.debug',
 
-  require 'essential/plugins/which-key',
-
-  -- modularize config
+  -- modularize everything
   { import = 'custom' },
 }, {
   ui = {
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
+    icons = vim.g.have_nerd_font and {},
+    -- or {
+    --   cmd = '⌘',
+    --   config = '🛠',
+    --   event = '📅',
+    --   ft = '📂',
+    --   init = '⚙',
+    --   keys = '🗝',
+    --   plugin = '🔌',
+    --   runtime = '💻',
+    --   require = '🌙',
+    --   source = '📄',
+    --   start = '🚀',
+    --   task = '📌',
+    --   lazy = '💤 ',
+    -- },
   },
 })
+-- }}
 
 -- vim: ts=2 sts=2 sw=2 et

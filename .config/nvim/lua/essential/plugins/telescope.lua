@@ -4,6 +4,8 @@
 -- you do for a plugin at the top level, you can do for a dependency.
 --
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 return {
   { -- Fuzzy Finder (files, lsp, etc)
@@ -75,16 +77,25 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
-      vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]earch Telescope' })
-      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
-      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ldfiles (<C-o>, Recent Files)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      keymap('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+      keymap('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
+      keymap('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+      keymap('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]earch Telescope' })
+      keymap(
+        'n',
+        '<leader>fa',
+        "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+        { noremap = true, silent = true, desc = '[F]ind [A]ll files' }
+      )
+      keymap('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
+      keymap('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
+      keymap('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+      keymap('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
+      keymap('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ldfiles (<C-o>, Recent Files)' })
+      keymap('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+      -- [[ TELESCOPE MARKS ]]
+      keymap('n', '<leader>m', '<cmd>Telescope marks<cr>', { noremap = true, silent = true, desc = 'Jump to Mark' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

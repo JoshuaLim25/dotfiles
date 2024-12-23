@@ -7,13 +7,15 @@ return {
         compile = false, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = {},
-        functionStyle = {},
-        keywordStyle = { italic = true },
-        statementStyle = { bold = true },
-        typeStyle = { --[[ bold = true  ]]
+        functionStyle = { bold = true },
+        typeStyle = { --[[ bold = true ]]
         },
+        keywordStyle = { italic = false },
+        statementStyle = { bold = true },
+        -- FIXME:
+        operatorStyle = { bold = true },
         transparent = false, -- do not set background color
-        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
         colors = { -- ADD/MODIFY THEME AND PALETTE COLORS
           palette = {
@@ -23,6 +25,7 @@ return {
             surimiOrange = '#de935f', -- constant/macro
             -- carpYellow = '#f0c674', -- identifier
             -- boatyellow2 = '#f0c674', -- operator
+            roninYellow = '#f0c674', -- DiagnosticVirtualTextWarn, GREAT DONT CHANGE
             springGreen = '#b5bd68', -- string
             -- waveAqua2 = '#8abeb7', -- type, too blue
             -- waveAqua2 = '#76946A', -- type, a little too dark
@@ -34,13 +37,34 @@ return {
             -- sakuraPink = '#d9a594', -- numbers, too much blending in
             sakuraPink = '#c4746e', -- numbers
             -- NOTE: find a use for '#7AA89F', what a pretty color
+            waveAqua1 = '#7AA89F',
+
+            -- Popup and Floats
+            waveBlue1 = '#2D4F67', -- ui.bg_search (search results)
+            waveBlue2 = '#223249', -- ui.bg_visual (visual select)
             -- }}
           },
           theme = {
             wave = {
               -- [[ TOMORROW-NIGHT HYBRID ]] {{
+              ui = {
+                bg_search = '#938AA9',
+                bg_visual = '#43436c',
+                -- bg_visual = '#2D4F67',
+              },
               syn = {
                 punct = '#C8C093', -- or "#C8C093," which is oldWhite
+              },
+              diag = {
+                error = '#cc6666',
+                -- error = '#D27E99',
+                -- error = '#FF9E3B',
+                -- error = '#de935f',
+                --ok = palette.springGreen,
+                warning = '#f0c674',
+                info = '#7E9CD8',
+                -- hint = '#7AA89F',
+                hint = '#76946A',
               },
               -- }}
             },
@@ -65,7 +89,8 @@ return {
             -- [[ DARKER COMPLETION WINDOWS ]] {{
             Pmenu = {
               fg = theme.ui.shade0,
-              bg = theme.ui.bg_p1, --[[ blend = vim.o.pumblend ]]
+              bg = theme.ui.bg_p1,
+              blend = vim.o.pumblend,
             }, -- add blend = vim.o.pumblend` to enable transparency
             PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
             PmenuSbar = { bg = theme.ui.bg_m1 },
@@ -73,7 +98,7 @@ return {
             -- }}
 
             -- [[ TINT DIAGNOSTIC MESSAGES ]] {{
-            -- bg mixed w/foreground color
+            -- bg highlighted w/foreground color
             DiagnosticVirtualTextHint = tintDiagnosticBg(theme.diag.hint),
             DiagnosticVirtualTextInfo = tintDiagnosticBg(theme.diag.info),
             DiagnosticVirtualTextWarn = tintDiagnosticBg(theme.diag.warning),
@@ -81,24 +106,24 @@ return {
             -- }}
 
             -- [[ TELESCOPE UI ]] {{
-            -- Everything's darker
+            -- [[ DARKER COLORS ]]
             TelescopeTitle = { fg = theme.ui.special, bold = true },
             TelescopeNormal = { bg = colors.bg_dim },
             TelescopeBorder = { fg = colors.bg_dim, bg = colors.bg_dim },
             TelescopePromptNormal = { bg = colors.bg_light0 },
             TelescopePromptBorder = { fg = colors.bg_light0, bg = colors.bg_light0 },
-
+            -- "Normal"/rounded list of files
+            TelescopePreviewNormal = { bg = colors.bg_dim },
+            TelescopePreviewBorder = { bg = colors.bg_dim, fg = colors.bg_dim },
+            -- "Normal"/rounded window into files
+            TelescopeResultsNormal = { bg = colors.bg_dim },
+            TelescopeResultsBorder = { fg = colors.bg_dim, bg = colors.bg_dim },
             -- Blockier list of files
-            TelescopeResultsNormal = { bg = '#1a1a22' },
-            TelescopeResultsBorder = { fg = '#1a1a22', bg = '#1a1a22' },
-
+            -- TelescopeResultsNormal = { bg = '#1a1a22' },
+            -- TelescopeResultsBorder = { fg = '#1a1a22', bg = '#1a1a22' },
             -- Blockier window into files
             -- TelescopePreviewNormal = { bg = theme.ui.bg_dim },
             -- TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-
-            -- "Normal"/rounded window into files
-            TelescopePreviewNormal = { bg = colors.bg_dim },
-            TelescopePreviewBorder = { bg = colors.bg_dim, fg = colors.bg_dim },
             -- }}
 
             -- [[ TRANSPARENT FLOATING WINDOWS ]] {{
@@ -122,7 +147,7 @@ return {
         end,
         theme = 'wave', -- Load "wave" theme when 'background' option is not set
         background = { -- map the value of 'background' option to a theme
-          dark = 'wave', -- try "dragon" !
+          dark = 'wave',
           light = 'lotus',
         },
       }

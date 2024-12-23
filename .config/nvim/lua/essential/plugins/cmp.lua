@@ -56,7 +56,8 @@ return {
         window = {
           completion = { -- rounded border; thin-style scrollbar
             border = 'rounded',
-            scrollbar = '║',
+            -- scrollbar = '║',
+            scrollbar = true,
           },
           documentation = { -- no border; native-style scrollbar
             -- border = nil,
@@ -126,7 +127,7 @@ return {
           --  completions whenever it has completion options available.
 
           -- NOTE: if you want this functionality, change the mapping, tmux conflict w/ leader key
-          -- ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-c>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
@@ -138,16 +139,16 @@ return {
           -- <c-h> is similar, except moving you backwards.
 
           -- NOTE: UNCOMMENT below to enable this, change the mapping, swaywm conflict
-          -- ['<C-l>'] = cmp.mapping(function()
-          --   if luasnip.expand_or_locally_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   end
-          -- end, { 'i', 's' }),
-          -- ['<C-h>'] = cmp.mapping(function()
-          --   if luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   end
-          -- end, { 'i', 's' }),
+          ['<C-l>'] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { 'i', 's' }),
+          ['<C-h>'] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps

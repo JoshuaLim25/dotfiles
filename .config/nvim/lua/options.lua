@@ -73,8 +73,7 @@ o.writebackup = false -- if a file is being edited by another program (or was wr
 o.splitright = true
 o.splitbelow = true
 -- save undo history
--- NOTE: ends up in ~/.local/state/nvim/undo/
-o.undofile = true
+o.undofile = true -- NOTE: default undodir in `~/.local/state/nvim/undo/` or `~/.local/share/nvim/undo/`
 
 -- VISUAL STUFF
 -- keep signcolumn on by default
