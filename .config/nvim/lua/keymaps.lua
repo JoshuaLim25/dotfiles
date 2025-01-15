@@ -60,6 +60,11 @@ keymap('n', 'N', 'Nzzzv', { silent = true })
 keymap('n', '*', '*zz', { silent = true })
 keymap('n', '#', '#zz', { silent = true })
 keymap('n', 'g*', 'g*zz', { silent = true })
+
+-- [[ "VERY MAGIC" (LESS ESCAPING NEEDED) REGEXES BY DEFAULT ]]
+keymap('n', '?', '?\\v')
+keymap('n', '/', '/\\v')
+keymap('c', '%s/', '%sm/')
 -- }}
 
 -- copy/paste
@@ -187,7 +192,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- [[ BUFFERS ]] {{
 keymap('n', '<leader>j', ':bnext<enter>', { noremap = false })
 keymap('n', '<leader>k', ':bprev<enter>', { noremap = false })
-keymap('n', '<leader>db', ':bdelete<enter>', { noremap = false })
+keymap('n', '<leader>bd', ':bdelete<enter>', { noremap = false })
 keymap('n', '<leader>;', ':b#<CR>', { desc = 'Swap to most recently used buffer' }) -- NOTE: <C-6> by default, fuck that.
 
 --  [[ WINDOW/SPLIT NAVIGATION ]]
@@ -208,6 +213,33 @@ vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', command = 'set nopas
 
 -- [[ FILETYPE DETECTION (ADD AS NEEDED) ]]
 --vim.api.nvim_create_autocmd('BufRead', { pattern = '*.txt', command = 'set filetype=someft' })
+-- }}
+
+-- [[ SPELLING ]] {{
+-- TODO:
+-- -- Set the keymap to toggle spell checking
+-- keymap('n', '<leader>tsp', ':lua toggle_spell()<CR>', { noremap = true, silent = true, desc = '[T]oggle [S][P]ell' })
+-- keymap('n', '<leader>tsp', '<cmd>set spell<CR>', { noremap = true, silent = true, desc = '[T]oggle [S][P]ell' })
+-- keymap('n', '<leader>tsp', '<cmd>set nospell<CR>', { noremap = true, silent = true, desc = '[T]oggle [S][P]ell' })
+keymap('n', '<leader>spc', 'z=', { noremap = true, silent = true, desc = '[S][P]ell auto[C]omplete possible words' })
+keymap('n', '<leader>spa', 'zg', { noremap = true, silent = true, desc = '[S][P]ell [A]dd to dictionary' })
+keymap('n', '<leader>spd', 'zw', { noremap = true, silent = true, desc = '[S][P]ell [D]elete from dictionary' })
+
+-- [[ AUTOCORRECT ]]
+local abbreviations = {
+  teh = 'the',
+  recieve = 'receive',
+  strcut = 'struct',
+  cosnt = 'const',
+  -- ['>>'] = '→',
+  -- ['<<'] = '←',
+  ['^^'] = '↑',
+  VV = '↓',
+}
+
+for from, into in pairs(abbreviations) do
+  vim.cmd(string.format('iabbrev %s %s', from, into))
+end
 -- }}
 
 -- -- shorter columns in text because it reads better that way

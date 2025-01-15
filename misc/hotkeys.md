@@ -3,10 +3,17 @@
 - `<prefix>&` : kill window (with all the panes) 
 - `<S-Left>`: move tmux window to left
 - `<S-Right>`: move tmux window to right
+- `<prefix>space`: freeze frame (modified)
+- `<prefix>t`: toggle/switch layouts (modified)
+maybe prefix V and H for copying cwd first
 
 ---
 
 # VIM
+Really been liking `xs` for stuff like `, `
+- `q:`: open the "command line window," press enter on command. Up, down work.
+- `@`: re-run the most recent command you entered
+
 - `yc`: "yank copy"
 - `<leader>so`: shell output
 - `<leader>;`: for the back and forth
@@ -24,6 +31,7 @@
 - `@s`: config block subheadings," -- subheader" -> "-- [[ SUBHEADER ]] " 
 - `@c`: checklist
     - *Note*: can't actually use insert mode `<C-l>` because of snippet expansion
+- `@t`: todo, on a newline it'll give you `- [ ] []()`
 
 ## PLUGIN-RELATED
 ### GIT

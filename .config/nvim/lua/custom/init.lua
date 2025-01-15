@@ -6,5 +6,6 @@ return {
   'mbbill/undotree',
   'norcalli/nvim-colorizer.lua',
   'folke/trouble.nvim',
+  'shortcuts/no-neck-pain.nvim',
   -- 'mrcjkb/rustaceanvim',
 }

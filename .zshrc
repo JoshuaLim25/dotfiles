@@ -31,6 +31,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # [[ NVIM = DEFAULT EDITOR ]]
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
+export FCEDIT="$(which nvim)"
 export MANPAGER='nvim +Man!'
  
 # [[ EXPORTS ]] {{
@@ -39,7 +40,7 @@ export MANPAGER='nvim +Man!'
 # NOTE: ORDER MATTERS. For `LHS:RHS,` LHS is the prepended head, RHS is the appended tail
 
 # NOTE: symlinked to ~/.dotfiles/scripts
-export PATH=$PATH:~/.local/bin/scripts
+export PATH=$PATH:~/.local/bin
 
 # BAT COLOR
 export BAT_THEME="ansi"
@@ -138,7 +139,8 @@ abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
 abbrev-alias cdsystems="cd ~/Documents/cis-384/"
 abbrev-alias cdtest="cd ~/spaghetti/test/"
 abbrev-alias cdnotes="cd ~/Documents/ObsidianNotes/"
-abbrev-alias cdgit="cd ~/Documents/git-playground/"
+abbrev-alias cdgit="cd ~/Documents/git_testing/"
+abbrev-alias cdrs="cd ~/spaghetti/langs/rust/testing_grounds/"
 
 # [[ PROJECT-SPECIFIC ]]
 abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
@@ -156,6 +158,7 @@ abbrev-alias gc="git commit"
 abbrev-alias gp="git push"
 abbrev-alias gd="git diff"
 abbrev-alias gl="git log --oneline --graph --decorate"
+abbrev-alias gll="git log --graph --decorate"
 abbrev-alias gr="git restore --staged"
 abbrev-alias gra="git restore --staged ."
 abbrev-alias gcls="git clone git@github.com:"
@@ -166,6 +169,14 @@ abbrev-alias dcbuild="docker compose build"
 abbrev-alias dcup="docker compose up"
 # See https://docs.docker.com/reference/cli/docker/compose/up/ for more
 abbrev-alias dcups="docker compose up --remove-orphans --abort-on-container-failure"
+
+# [[ RUST ]]
+abbrev-alias clipme='
+cargo clippy -- \
+-W clippy::pedantic \
+-W clippy::nursery \
+-W clippy::unwrap_used \
+'
 
 # [[ TMUX ]] {{
 abbrev-alias t="tmux"
@@ -188,12 +199,16 @@ alias echopath='echo $PATH | tr ":" "\n"'
 alias vdiff='nvim -d'
 alias py='python3'
 alias pd='pushd'
-alias todo='nvim ~/TODO.md'
-alias hk='nvim ~/hotkeys.md'
+alias todo='nvim ~/misc/TODO.md'
+alias hk='nvim ~/misc/hotkeys.md'
+alias remind='nvim ~/misc/reminders.md'
+alias qq='nvim ~/misc/blooms.md'
 alias sc='shellcheck'
 # https://www.reddit.com/r/golang/comments/uzrbw3/best_practice_do_you_use_the_go_compiler_from/
 alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.linux-amd64.tar.gz | sudo tar zx -C /usr/local/ go'
 alias btconnect='bluetoothctl connect BC:87:FA:BB:97:66'
+alias souniq='sort | uniq -c'
+alias e='exercism'
 # }}
 
 # [[ REFERENCES ]] {{
