@@ -7,7 +7,7 @@ return {
         compile = false, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = {},
-        functionStyle = { bold = true },
+        functionStyle = {},
         typeStyle = { --[[ bold = true ]]
         },
         keywordStyle = { italic = false },
@@ -32,12 +32,15 @@ return {
             waveAqua2 = '#87a987', -- type
             -- springBlue = '#b5cbd2', -- special1, primitive types, better for starker contrast
             springBlue = '#9fb5c9', -- special1, primitive types
+            -- crystalBlue = '#8cbfb8',
             crystalBlue = '#81a2be',
+            -- crystalBlue = '#75a1c1',
             oniViolet = '#b294bb', -- keyword
             -- sakuraPink = '#d9a594', -- numbers, too much blending in
             sakuraPink = '#c4746e', -- numbers
             -- NOTE: find a use for '#7AA89F', what a pretty color
             waveAqua1 = '#7AA89F',
+            -- waveAqua1 = '#8cbfb8',
 
             -- Popup and Floats
             waveBlue1 = '#2D4F67', -- ui.bg_search (search results)

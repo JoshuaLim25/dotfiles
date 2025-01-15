@@ -16,6 +16,9 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+" Moving lines: https://vim.fandom.com/wiki/Moving_lines_up_or_down#Mappings_to_move_lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 colorscheme desert
 

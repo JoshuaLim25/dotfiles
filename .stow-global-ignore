@@ -1,5 +1,6 @@
 # src: https://www.gnu.org/software/stow/manual/stow.html#Ignore-Lists
 # Comments and blank lines are allowed.
+# seems like a good post of various commands: https://unix.stackexchange.com/questions/121910/gnu-stow-how-to-stow-only-selected-files-folders
 
 # stow -v --target=$HOME --no-folding misc/*
 # -v: verbose output
@@ -31,7 +32,7 @@ _darcs
 
 # Ignore scripts, already a symlink from `~/.local/bin/scripts`
 # see: `export PATH=$PATH:~/.local/bin/scripts` in `~/.zshrc`
-^scripts/
+\scripts
 
 # Ignore markdown and backup files
 \.md$

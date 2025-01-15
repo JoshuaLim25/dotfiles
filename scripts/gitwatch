@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# See https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git for prettifying log
+
+# TODO: a simple sanity check script that:
+# Runs `git log` and `git status` each time the underlying data model has changed.
+# Purpose: practice git in my playground area so I don't screw up anything that really matters
+
+while true; do
+    git status --short
+    git log -5 --oneline --graph --decorate
+    # NOTE: --decorate preserves ref names (HEAD -> master, origin/master, origin/HEAD)
+    sleep 10
+done
