@@ -7,18 +7,24 @@
 
 # SHORTER TERM
 ---
-## NEED TO LEARN THIS TO DO PROJECT
+## NEED TO LEARN THIS TO DO PROJECT RUST
 - [ ] file i/o in rust
 - [ ] data modeling (i.e. typestate pattern)
 
 - [ ] linking and crates and module system
 
+
+
+
 ## TODAY
+- [ ] .dotfiles automation script
+- [ ] ubuntu VM
 - [ ] FAFSA
 - [ ] schedule
 - [ ] source application
 - [ ] seed proj
-- [ ] .dotfiles automation script
+
+
 
 #### THIS WEEK
 - [ ] [automate dotfiles](https://github.com/jrkessl/workstation/blob/main/automated.sh)

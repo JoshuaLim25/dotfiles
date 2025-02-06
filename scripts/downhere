@@ -5,10 +5,14 @@ set -euo pipefail
 # Simpl script to copy most recently downloaded file
 # to the cwd
 
+down_file="$(ls -Art ~/Downloads | tail -n1)"
 # -A for all but ./ and ../
 # -r for reversed output
 # -t for sorted by time, newest first
-down_file="$(ls -Art ~/Downloads | tail -n1)"
+
+# https://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory
+# down_file="$(find . -type f -printf '%T@ %p\n' \
+#     | sort -n | tail -1 | cut -f2- -d' ')"
 
 if [[ -z "$down_file" ]]; then
     echo "No new downloaded files"

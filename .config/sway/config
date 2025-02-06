@@ -11,6 +11,11 @@ set $mod Mod1
 
 # get rid of stupid title bar
 default_border none
+titlebar_border_thickness 0                                                     
+titlebar_padding 0
+
+# client.focused #81a2be #2D4F67 #ffffff
+client.focused #81a2be #363646 #ffffff
 
 # Home row direction keys, like vim
 set $left h
@@ -27,7 +32,8 @@ set $term kitty
 set $menu wofi --show run
 
 # font configuration
-font pango: JetBrainsMono Nerd Font 14
+# font pango: JetBrainsMono Nerd Font 14
+font pango: monospace 1
 
 
 ### Output configuration
@@ -304,20 +310,27 @@ exec_always pkill kanshi; exec kanshi
 bindsym $mod+Shift+s exec swaylock -f && sleep 2 && systemctl suspend
 # bindsym XF86Sleep exec /home/josh/.local/bin/scripts/sleepy.sh
 
-# Screenshots
+# [[ SCREENSHOTS ]] {{
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
-
 # save selected region to designated folder
 # bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshot-$(date +%Y%m%d-%H%M%S).png
-
 # entire screen, no selection
 # bindsym Print exec grim ~/Pictures/Screenshot-$(date +%Y%m%d-%H%M%S).png
+# }}
 
+# Disable the blue bars on stack
+hide_edge_borders both
+for_window [con_id=__focused__] title_format ""
 
 # [[ BLUETOOTH ]] {{
-exec bluetoothctl trust BC:87:FA:BB:97:66
 exec bluetoothctl power on
+# Headphones
+exec bluetoothctl trust BC:87:FA:BB:97:66
 exec bluetoothctl connect BC:87:FA:BB:97:66
+
+# Keyboard
+exec bluetoothctl trust 34:88:5D:D1:54:BD 
+exec bluetoothctl connect 34:88:5D:D1:54:BD 
 # }}
 
 
@@ -331,4 +344,3 @@ bar {
 
 
 include /etc/sway/config.d/*
-

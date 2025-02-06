@@ -1,25 +1,30 @@
-# Good refresh:
+# Good refreshers:
 https://wiki.archlinux.org/title/QEMU#Creating_new_virtualized_system
 https://drewdevault.com/2018/09/10/Getting-started-with-qemu.html
 
-`du -h file.qcow2` will show you the real occupied disk space 
+- *Note*: If you store the hard disk images on a `btrfs` file system, you should consider disabling Copy-on-Write for the directory before creating any images.
+  - Can be specified in option nocow for qcow2 format when creating image:
+  `$ qemu-img create -f qcow2 image_file -o nocow=on 4G`
 
-# Warning
+# Commands
+- *Note*: `du -h file.qcow2` will show you the real occupied disk space 
 
-If you store the hard disk images on a Btrfs file system, you should consider disabling Copy-on-Write for the directory before creating any images.
-Can be specified in option nocow for qcow2 format when creating image:
-`$ qemu-img create -f qcow2 image_file -o nocow=on 4G`
-
-# Installation:
-
-# Arch:
-`sudo pacman -S qemu` 
-(optionally "qemu-arch-extra" for more architectures)
+```sh
 
 # To create a virtual image use:
 `qemu-img create -f qcow2 Image.img 10G`
-(create is to create an image, -f qcow2 sets the format to qcow2, Image.img is our final file and 10G is it's size)
+# INFO: The create subcommand is to create an image, -f qcow2 sets the format to qcow2, Image.img is our final file and 10G is it's size
 
+qemu-system-x86_64 \
+    -enable-kvm \
+    -m 2048 \ # Gives guest (the VM) 2048M of RAM (memory)
+    -nic user,model=virtio \ # Use the `virtio` NIC model
+    -drive file=alpine.qcow2,media=disk,if=virtio \ # Attach virtual disk to guest (storage)
+    -cdrom alpine-standard-3.8.0-x86_64.iso \ # Connects virtual CD drive, load install media (OS)
+    -sdl
+# When you shut down the host, run qemu again without -cdrom to start the VM.
+
+```
 # Launching the VM:
 `qemu-system-x86_64 -enable-kvm -cdrom OS_ISO.iso -boot menu=on -drive file=Image.img -m 2G`
 (-enable-kvm enables KVM, -cdrom selects an iso to load as a cd, -boot menu=on enables a boot menu, -drive file= selects a file for the drive, -m sets the amount of dedicated RAM)
