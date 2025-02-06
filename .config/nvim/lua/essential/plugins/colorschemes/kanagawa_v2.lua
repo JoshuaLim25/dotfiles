@@ -51,7 +51,8 @@ return {
             wave = {
               -- [[ TOMORROW-NIGHT HYBRID ]] {{
               ui = {
-                bg_search = '#938AA9',
+                -- bg_search = '#938AA9',
+                bg_search = '#2D4F67',
                 bg_visual = '#43436c',
                 -- bg_visual = '#2D4F67',
               },

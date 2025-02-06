@@ -41,6 +41,7 @@ export MANPAGER='nvim +Man!'
 
 # NOTE: symlinked to ~/.dotfiles/scripts
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin/scripts
 
 # BAT COLOR
 export BAT_THEME="ansi"
