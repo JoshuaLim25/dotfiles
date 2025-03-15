@@ -22,7 +22,7 @@ return {
         },
         TODO = { icon = ' ', color = 'info', alt = { 'INFO', 'RECALL', 'TAKEAWAY' } },
         HACK = { icon = ' ', color = 'warning' },
-        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'TIME' } },
         PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
         NOTE = { icon = ' ', color = 'hint', alt = { 'ASSUMPTION' } },
         TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED', 'WHY', 'GIVEN', 'HOW', 'EG', 'NEW' } },

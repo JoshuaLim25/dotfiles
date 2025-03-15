@@ -67,7 +67,6 @@ keymap('n', '/', '/\\v')
 keymap('c', '%s/', '%sm/')
 -- }}
 
--- copy/paste
 -- [[ COPY/PASTE ]] {{
 -- [[ KEEP PASTE BUFFER CLEAN ]]
 keymap('x', 'p', [["_dP]])
@@ -231,8 +230,8 @@ local abbreviations = {
   recieve = 'receive',
   strcut = 'struct',
   cosnt = 'const',
-  -- ['>>'] = '→',
-  -- ['<<'] = '←',
+  ['>>'] = '→',
+  ['<<'] = '←',
   ['^^'] = '↑',
   VV = '↓',
 }

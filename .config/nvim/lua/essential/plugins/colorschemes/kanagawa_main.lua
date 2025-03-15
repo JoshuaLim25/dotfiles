@@ -57,7 +57,7 @@ return {
                 -- bg_visual = '#2D4F67',
               },
               syn = {
-                punct = '#C8C093', -- or "#C8C093," which is oldWhite
+                punct = '#C8C093', -- oldWhite
               },
               diag = {
                 error = '#cc6666',
