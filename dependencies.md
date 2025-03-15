@@ -48,6 +48,7 @@
 - `pipewire-alsa`
 - `pipewire-audio`
 - `pipewire-pulse`
+- `alsa-utils`
 - `obsidian`
 - `openssh`
 - `reflector`

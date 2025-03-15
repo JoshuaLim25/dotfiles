@@ -1,4 +1,7 @@
 # NOTE: Stolen from arch wiki
+# when on new machine, need to do following:
+# 1. `systemctl --user enable ssh-agent` # and start
+# 2. `stow . -t ~/.config/systemd/user`
 
 # https://wiki.archlinux.org/title/SSH_keys#Forwarding_ssh-agent
 # "When forwarding a local ssh-agent to remote (e.g., through command-line argument ssh -A remote 
