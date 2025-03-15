@@ -5,7 +5,7 @@
 # pretty sure this one makes term prompt just '$'
 # export PS1="\W \$"
 # \w makes it pwd
-PS1="\w > "
+# PS1="\w > "
 
 # my changes
 PATH="$HOME/.local/bin:$PATH"
@@ -142,9 +142,12 @@ if ! shopt -oq posix; then
 fi
 
 # changing prompt
-PS1=${THEME_PROMPT_CHAR_PS1:-"❯ "}
+# PS1=${THEME_PROMPT_CHAR_PS1:-"❯ "}
 
 #nvim libstdc++.6 fix, with treesitter fucking up
 export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
 . "$HOME/.cargo/env"
+
+
+

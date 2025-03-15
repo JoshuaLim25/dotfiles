@@ -231,8 +231,8 @@ local abbreviations = {
   recieve = 'receive',
   strcut = 'struct',
   cosnt = 'const',
-  -- ['>>'] = '→',
-  -- ['<<'] = '←',
+  ['>>'] = '→',
+  ['<<'] = '←',
   ['^^'] = '↑',
   VV = '↓',
 }
