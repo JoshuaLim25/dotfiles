@@ -13,9 +13,6 @@ fi
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # }}
 
-# Rustup tab completions
-fpath+=~/.zfunc
-
 # Directory to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -38,10 +35,17 @@ export MANPAGER='nvim +Man!'
 # NOTE: you want to define that directory to the path variable, not the actual binary:
 # EG: `PATH=$MYDIR:$PATH`, where MYDIR is def as the dir containing your binary
 # NOTE: ORDER MATTERS. For `LHS:RHS,` LHS is the prepended head, RHS is the appended tail
-
 # NOTE: symlinked to ~/.dotfiles/scripts
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/bin/scripts
+
+# RUSTUP TAB COMPLETIONS
+fpath+=~/.zfunc
+
+# # SCRIPT ORGANIZATION
+# # https://stackoverflow.com/questions/24583863/how-do-i-organize-my-zsh-code-multiple-methods-in-single-file-vs-multiple-files?utm_source=chatgpt.com
+# fpath=(~/.zsh_functions $fpath)
+# autoload -Uz myfunc1 myfunc2
 
 # BAT COLOR
 export BAT_THEME="ansi"
@@ -157,6 +161,8 @@ abbrev-alias ga="git add"
 abbrev-alias gaa="git add ."
 abbrev-alias gc="git commit"
 abbrev-alias gp="git push"
+abbrev-alias gb="git branch"
+abbrev-alias gch="git checkout"
 abbrev-alias gd="git diff"
 abbrev-alias gl="git log --oneline --graph --decorate"
 abbrev-alias gll="git log --graph --decorate"
@@ -205,19 +211,27 @@ alias hk='nvim ~/misc/hotkeys.md'
 alias remind='nvim ~/misc/reminders.md'
 alias qq='nvim ~/misc/blooms.md'
 alias sc='shellcheck'
-# https://www.reddit.com/r/golang/comments/uzrbw3/best_practice_do_you_use_the_go_compiler_from/
-alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.linux-amd64.tar.gz | sudo tar zx -C /usr/local/ go'
 alias btconnect='bluetoothctl connect BC:87:FA:BB:97:66'
 alias souniq='sort | uniq -c'
 alias e='exercism'
+# https://www.reddit.com/r/golang/comments/uzrbw3/best_practice_do_you_use_the_go_compiler_from/
+# TODO: hardcoded binary. See script in ~/.local/bin/scripts/goupdate
+alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.linux-amd64.tar.gz | sudo tar zx -C /usr/local/ go'
 # }}
 
+# [[ TESTING RANDOM IDEAS ]] {{
+alias gitplay='cd ~/spaghetti/git_playground/'
+# BAD: won't work b/c subshells. Script is called from some proc P, which spawns a child process C. When C returns control to P it's back where it was.
+alias goplay='cd /tmp && (nvim main.go)'
+# }}
+#
 # [[ REFERENCES ]] {{
 # [[ LANGUAGES ]]
 alias refbash="nvim ~/spaghetti/langs/bash/bashics.sh"
 alias bbash="nvim ~/spaghetti/langs/bash/bad_bash.sh"
 alias refcpp="nvim ~/spaghetti/langs/c++/ref.md"
 alias refrust="nvim ~/spaghetti/langs/rust/reference-code/help.rs"
+alias refgo="nvim ~/spaghetti/langs/go/golang-cheatsheet.md"
 # [[ TOOLS ]]
 alias refvm="nvim ~/spaghetti/tools/vm-ref.md"
 alias refjson="nvim ~/spaghetti/tools/json.md"
@@ -226,6 +240,7 @@ alias refmake="nvim ~/spaghetti/tools/Makefile"
 alias refdocker="nvim ~/spaghetti/tools/docker-ref.md"
 alias refgit="nvim ~/spaghetti/tools/git.md"
 alias refvim="nvim ~/spaghetti/tools/vim.md"
+alias refgrep="nvim ~/spaghetti/tools/grep.md"
 # }}
 
 # [[ SHELL INTEGRATIONS ]] {{
