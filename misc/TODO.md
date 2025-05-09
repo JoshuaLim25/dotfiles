@@ -10,21 +10,30 @@
 ## NEED TO LEARN THIS TO DO PROJECT RUST
 - [ ] file i/o in rust
 - [ ] data modeling (i.e. typestate pattern)
-
 - [ ] linking and crates and module system
+- [ ] [macros in config](https://www.youtube.com/watch?v=Y3XWijJgdJs)
 
-
-
-
-## TODAY
+## PROJ IDEAS (GO)
 - [ ] .dotfiles automation script
+- [ ] container in golang
+- [ ] start one of your devops projects
+- [ ] rewriting unix utils (
+    echo - io.Reader, io.Writer, os.Args, os.Stdin, os.Stdout, os.Stderr
+    cat - os.Open (plus reader, writer, etc)
+    | (pipe) - os.Pipe, os.Exec (plus reader, writer, etc)
+    ls - fmt.Printf, os.Stat, etc (plus reader, writer, etc)
+    grep - flag package, regexp package
+    curl - http package
+    gzip - compress packages
+    and so on
+)
+- [ ] templates for code/config files/scripts management
+- [ ] Encrypted file server: Handle file uploads/download with chunking, parallelize encryption/decryption and allow usage of passwords/keys to encrypt/decrypt.
+
 - [ ] ubuntu VM
 - [ ] FAFSA
 - [ ] schedule
-- [ ] source application
-- [ ] seed proj
 
-
 
 #### THIS WEEK
 - [ ] [automate dotfiles](https://github.com/jrkessl/workstation/blob/main/automated.sh)
