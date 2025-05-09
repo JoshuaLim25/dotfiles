@@ -14,6 +14,24 @@
 	trustExitCode = false
 [credential "https://github.com"]
 	helper = store --file ~/.dotfiles/gitcredentials
+[alias]
+	# NOTE: why I migrated from .zshrc aliases - https://www.reddit.com/r/git/comments/1duhi1u/better_git_shell_aliases/
+	# > If you're creating external commands, you don't even need aliases. If `git foo` isn't recognized by git, it will look for `git-foo` in your $PATH and run it. In fact some of the "core" git tools are written like this, see ls -l /usr/lib/git-core for which ones aren't symlinks to /usr/bin/git, many of them are shell or perl scripts. 
+	s = status
+	a = add
+	aa = add .
+	c = commit
+	p = push
+	b = branch
+	co = checkout
+	d = diff
+	l = log --oneline --graph --decorate
+	ll = log --graph --decorate
+	r = restore --staged
+	ra = restore --staged .
+	; cls= clone git@github.com:
+	; https://stackoverflow.com/questions/39466417/how-do-i-search-my-git-aliases
+	aliases = !git config --list | grep ^alias\\. | cut -c 7- | grep -Ei --color \"$1\" "#"
 
 
 ; [user]

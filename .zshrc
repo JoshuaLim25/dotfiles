@@ -156,19 +156,6 @@ abbrev-alias lsout='ls ./output | wc -l'
 
 # [[ GIT ]]
 abbrev-alias g="git "
-abbrev-alias gs="git status"
-abbrev-alias ga="git add"
-abbrev-alias gaa="git add ."
-abbrev-alias gc="git commit"
-abbrev-alias gp="git push"
-abbrev-alias gb="git branch"
-abbrev-alias gch="git checkout"
-abbrev-alias gd="git diff"
-abbrev-alias gl="git log --oneline --graph --decorate"
-abbrev-alias gll="git log --graph --decorate"
-abbrev-alias gr="git restore --staged"
-abbrev-alias gra="git restore --staged ."
-abbrev-alias gcls="git clone git@github.com:"
 
 # [[ DOCKER ]]
 abbrev-alias dc="docker compose"
