@@ -20,8 +20,11 @@ return {
         colors = { -- ADD/MODIFY THEME AND PALETTE COLORS
           palette = {
             -- [[ TOMORROW-NIGHT HYBRID ]] {{
+            -- also from https://terminal.sexy/
+            -- see the folder ./sexy_colors/
             -- Change ALL USAGES of these colors
-            waveRed = '#cc6666', -- preproc, special2
+            -- waveRed = '#cc6666', -- preproc, special2
+            waveRed = '#a54242', -- preproc, special2
             surimiOrange = '#de935f', -- constant/macro
             -- carpYellow = '#f0c674', -- identifier
             -- boatyellow2 = '#f0c674', -- operator

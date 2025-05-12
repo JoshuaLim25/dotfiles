@@ -30,6 +30,13 @@ keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- [[ DUPLICATE A LINE, COMMENT OUT THE ORIGINAL LINE ]]
 keymap('n', 'yc', 'yygccp', { remap = true }) -- NOTE: `remap = true` is required
 
+-- [[ SENSIBLE BEHAVIOR ]]
+keymap('n', 'J', 'mzJ`z')
+
+-- [[ GLOBAL SUBSTITUTION ]]
+keymap('n', '<leader>su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+-- TODO: https://github.com/sheerun/blog/blob/master/_posts/2014-03-21-how-to-boost-your-vim-productivity.markdown#iv-discover-text-search-object
+
 -- [[ STAY IN INDENT MODE ]]
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
@@ -69,7 +76,7 @@ keymap('c', '%s/', '%sm/')
 
 -- [[ COPY/PASTE ]] {{
 -- [[ KEEP PASTE BUFFER CLEAN ]]
-keymap('x', 'p', [["_dP]])
+-- keymap('x', '<leader>p', [["_dP]])
 
 -- [[ DELETE WITHOUT COPYING INTO REGISTER ]]
 -- keymap('n', 'x', '"_x', opts) -- WHY: makes it hard to correct small typos (i.e., using `xp`)
@@ -148,15 +155,21 @@ vim.diagnostic.config {
 }
 
 -- [[ TOGGLE DIAGNOSTICS ]]
+
 local diagnostics_active = true
 vim.keymap.set('n', '<leader>dd', function()
   diagnostics_active = not diagnostics_active
-  if diagnostics_active then
-    vim.diagnostic.enable(true)
-  else
-    -- vim.diagnostic.enable(false)
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-  end
+  -- this only eliminates some
+  vim.diagnostic.config {
+    virtual_text = diagnostics_active,
+    underline = diagnostics_active,
+  }
+  -- if diagnostics_active then
+  --   vim.diagnostic.enable(true)
+  -- else
+  --   -- vim.diagnostic.enable(false)
+  --   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  -- end
 end)
 -- }}
 
@@ -270,5 +283,64 @@ end
 -- tnoremap <C-w>l <C-\><C-n><C-w>l<CR>
 -- tnoremap <C-h> <C-\><C-n><C-w>h<CR>
 -- ]]
+
+-- Floating terminal, credits of TJ
+vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
+
+local state = {
+  floating = {
+    buf = -1,
+    win = -1,
+  },
+}
+
+local function create_floating_window(opts)
+  opts = opts or {}
+  local width = opts.width or math.floor(vim.o.columns * 0.8)
+  local height = opts.height or math.floor(vim.o.lines * 0.8)
+
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  local buf = nil
+  if vim.api.nvim_buf_is_valid(opts.buf) then
+    buf = opts.buf
+  else
+    buf = vim.api.nvim_create_buf(false, true)
+  end
+
+  local win_config = {
+    relative = 'editor',
+    border = 'rounded',
+    style = 'minimal',
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+  }
+
+  local win = vim.api.nvim_open_win(buf, true, win_config)
+
+  return { buf = buf, win = win }
+end
+
+local new_terminal = function()
+  if not vim.api.nvim_win_is_valid(state.floating.win) then
+    state.floating = create_floating_window { buf = state.floating.buf }
+    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+      vim.cmd.terminal()
+    end
+
+    -- Start float terminal in insert mode
+    vim.api.nvim_set_current_win(state.floating.win)
+    vim.cmd 'startinsert!'
+  else
+    vim.api.nvim_win_hide(state.floating.win)
+  end
+end
+
+vim.api.nvim_create_user_command('NewTerm', new_terminal, {})
+
+vim.keymap.set({ 'n', 't' }, '<space>nt', new_terminal)
 
 -- vim: ts=2 sts=2 sw=2 et

@@ -33,10 +33,11 @@ require('lazy').setup({
   -- require 'essential/plugins/colorschemes/kanagawa.lua',
   -- require 'essential/plugins/colorschemes/handmade-hybrid.lua',
   -- require 'essential/plugins/colorschemes/kanagawa-handmade.lua',
-  require 'essential.plugins.colorschemes.kanagawa_main',
+  -- require 'essential.plugins.colorschemes.kanagawa_main',
+  require 'essential.plugins.colorschemes.sexy',
   -- }}
-  -- NOTE: NOT USING CURRENTLY
-  -- remember to mv them from .bak -> .lua
+  -- NOTE: NOT USING CURRENTLY, but **remember to uncomment
+  -- them after changing from .bak -> .lua**
   -- require 'essential.plugins.neo-tree',
   -- require 'essential.plugins.indent_line',
   -- require 'essential.plugins.debug',
