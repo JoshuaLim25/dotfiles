@@ -106,6 +106,48 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # }}
 
+# [[ SHELL INTEGRATIONS ]] {{
+eval "$(fzf --zsh)"
+# eval "$(zoxide init --cmd cd zsh)"
+# }}
+
+# [[ FZF CONFIGURATIONS ]] {{
+# src: https://github.com/junegunn/fzf?tab=readme-ov-file#display-modes 
+# https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
+# https://github.com/junegunn/fzf?tab=readme-ov-file#tips
+export FZF_TMUX_OPTS=" -p90%,80% "
+export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --hidden --follow --exclude .git "
+export FZF_DEFAULT_OPTS="--height 80% --layout reverse --border --color=hl:#7AA89F --preview-window=right:80% --bind 'ctrl-d:preview-page-down' --bind 'ctrl-u:preview-page-up' --bind 'CTRL-O:toggle-preview-wrap'"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+# https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-t
+export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview 'bat --color=always -n --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'eza --icons=always --tree --color=always {} | head -200'"
+# export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+# src: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#full-command-on-preview-window
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+zle     -N     fzf-history-widget-accept
+bindkey -r '^R' # unbind: https://unix.stackexchange.com/questions/285208/how-to-remove-a-zsh-keybinding-if-i-dont-know-what-it-does
+bindkey '^R' fzf-history-widget-accept
+# src: https://github.com/junegunn/fzf-git.sh
+source ~/.dotfiles/scripts/fzf-git.sh
+# INFO: use `bindkey -L` :) and `echo "CtrlVEsc/"`
+# https://superuser.com/questions/169920/binding-fn-delete-in-zsh-on-mac-os-x/169930#169930
+# ^G^B           # branches
+# ^G^E           # each_ref
+# ^G^F           # files
+# ^G^H           # hashes
+# ^G^L           # lreflogs
+# ^G^R           # remotes
+# ^G^S           # stashes
+# ^G^T           # tags
+# ^G^W           # worktrees
+alias fgit='fzf-git.sh --run'
+# }}
+
 # [[ CUSTOM SCRIPTS ]] {{
 # Keybindings
 source ~/.dotfiles/scripts/set-vi-mode.sh
@@ -137,7 +179,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 abbrev-alias v='nvim'
 abbrev-alias getmeout="shutdown -h now"
 abbrev-alias za="zathura"
-abbrev-alias minitree="tree -aL 3 --prune"
 
 # [[ QUICK NAVIGATION ]]
 abbrev-alias cdracket="cd ~/Documents/cis-352/autograder-assignments/"
@@ -151,7 +192,7 @@ abbrev-alias cdrs="cd ~/spaghetti/langs/rust/testing_grounds/"
 abbrev-alias cdip="cd ~/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator"
 abbrev-alias cdlogs="cd /home/josh/research-projects/seed-emulator/examples/internet/B28_traffic_generator/0-iperf-traffic-generator/logs"
 abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
-abbrev-alias s="source development.env && source seedenv/bin/activate"
+# abbrev-alias s="source development.env && source seedenv/bin/activate"
 abbrev-alias lsout='ls ./output | wc -l'
 
 # [[ GIT ]]
@@ -178,29 +219,56 @@ abbrev-alias tnew="tmux new -s"
 
 # [[ ALIASES ]] {{
 # [[ SHELL ]]
+alias s='source ~/.zshrc'
+alias dot='cd ~/.dotfiles'
+alias vz='nvim ~/.zshrc'
 alias c='clear'
-alias ls='ls --color'
-alias ll='ls -lh --color'
+alias ls='ls --color=always -F'
+alias l="eza --no-filesize --color=always --no-user --classify"
+alias ll="eza --no-filesize --git --long --color=always --no-user --classify"
+alias lla="eza -a --no-filesize --git --long --color=always --no-user --classify"
+alias lll="eza --long --git --color=always --no-user --classify --tree --level=2"
 alias cat='bat'
+alias bat="bat --color=always --style=numbers,changes,header,grid --italic-text=always"
 alias rm='rm -I' # safety
-alias mv='mv -i' # safety
+alias mv='mv -iv' # safety
 alias grep='rg'
+alias mdkir='mkdir' # i have a disability
 # alias vim='nvim'
 alias ip='ip --color=auto'
-alias echopath='echo $PATH | tr ":" "\n"'
+alias path='echo $PATH | tr ":" "\n"'
+alias pkg="pacman -Qq | fzf \
+  --preview 'pacman -Qil {} | bat --style=full --color=always --language=yaml' \
+  --preview-window=right:60%:wrap \
+  --header='[PKG INFO] Press ENTER to view full details, ? for help' \
+  --layout=reverse \
+  --border=rounded \
+  --info=inline \
+  --height=80% \
+  --bind 'enter:execute(pacman -Qil {} | bat --style=full --color=always --language=yaml | less -R)' \
+  --bind 'ctrl-d:preview-page-down' \
+  --bind 'ctrl-u:preview-page-up' \
+  --bind '?:toggle-preview-wrap'"
+
 
 # [[ "QOL" ]]
+# alias f='fzf'
+alias f='fzf --print0 | xargs -0 --no-run-if-empty -- nvim' # and ~/.dotfiles/scripts/ff :)
+alias pd='pushd'
 alias vdiff='nvim -d'
 alias py='python3'
-alias pd='pushd'
+alias tree="tree -L 3 -a -I '.git' --charset X "
+alias minitree="tree -aL 3 --prune"
+alias dtree="tree -L 3 -a -d -I '.git' --charset X "
 alias todo='nvim ~/misc/TODO.md'
 alias hk='nvim ~/misc/hotkeys.md'
 alias remind='nvim ~/misc/reminders.md'
 alias qq='nvim ~/misc/blooms.md'
+alias proompt='nvim ~/spaghetti/proompt.md'
 alias sc='shellcheck'
 alias btconnect='bluetoothctl connect BC:87:FA:BB:97:66'
 alias souniq='sort | uniq -c'
-alias e='exercism'
+alias text='touch test.txt && echo "Alice\nBob\nCharlie" >> test.txt'
 # https://www.reddit.com/r/golang/comments/uzrbw3/best_practice_do_you_use_the_go_compiler_from/
 # TODO: hardcoded binary. See script in ~/.local/bin/scripts/goupdate
 alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.linux-amd64.tar.gz | sudo tar zx -C /usr/local/ go'
@@ -210,6 +278,7 @@ alias goupdate='sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/go1.18.2.
 alias gitplay='cd ~/spaghetti/git_playground/'
 # BAD: won't work b/c subshells. Script is called from some proc P, which spawns a child process C. When C returns control to P it's back where it was.
 alias goplay='cd /tmp && (nvim main.go)'
+alias vv='cd /tmp && (nvim random.md)'  # e.g., changelog for big commits
 # }}
 #
 # [[ REFERENCES ]] {{
@@ -228,9 +297,5 @@ alias refdocker="nvim ~/spaghetti/tools/docker-ref.md"
 alias refgit="nvim ~/spaghetti/tools/git.md"
 alias refvim="nvim ~/spaghetti/tools/vim.md"
 alias refgrep="nvim ~/spaghetti/tools/grep.md"
-# }}
-
-# [[ SHELL INTEGRATIONS ]] {{
-eval "$(fzf --zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
+alias refuml="nvim ~/spaghetti/tools/uml.md"
 # }}

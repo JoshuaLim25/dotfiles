@@ -5,8 +5,21 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+	; src: https://jvns.ca/blog/2024/02/16/popular-git-config-options/#core-pager-delta
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	dark = true      # omit for auto-detection: https://dandavison.github.io/delta/choosing-colors-styles.html
+
 [diff]
+	algorithm = histogram # https://jvns.ca/blog/2024/02/16/popular-git-config-options/#diff-algorithm-histogram
+	conflictstyle = zdiff3
 	tool = nvim -d
+	; Useful for large repos where file renames aren't detected due to size limits.
+	; Can slow down diffs slightly in huge repos, but mostly fine.
+	renamelimit = 15000
 [merge]
 	tool = nvim -d
 [mergetool]
@@ -17,21 +30,49 @@
 [alias]
 	# NOTE: why I migrated from .zshrc aliases - https://www.reddit.com/r/git/comments/1duhi1u/better_git_shell_aliases/
 	# > If you're creating external commands, you don't even need aliases. If `git foo` isn't recognized by git, it will look for `git-foo` in your $PATH and run it. In fact some of the "core" git tools are written like this, see ls -l /usr/lib/git-core for which ones aren't symlinks to /usr/bin/git, many of them are shell or perl scripts. 
+
+	# Basics
 	s = status
 	a = add
 	aa = add .
 	c = commit
 	p = push
-	b = branch
-	co = checkout
-	d = diff
 	l = log --oneline --graph --decorate
 	ll = log --graph --decorate
-	r = restore --staged
-	ra = restore --staged .
-	; cls= clone git@github.com:
+
+	# Branches and remotes
+	b = branch
+	co = checkout
+	sw = switch
+	; force-push that refuses to overwrite upstream work that I haven’t seen
+	pf = push --force-with-lease
+	sw = switch
+
+
+	# Diffs
+	d = diff
+	ds = diff --staged
+
+	# Unstaging/Fixing mistakes
+	rs = restore --staged
+	rsa = restore --staged .
+	unstage = reset HEAD --
+	touch = log --oneline -1 -- # When was this file last committed?
+
+	# Misc
 	; https://stackoverflow.com/questions/39466417/how-do-i-search-my-git-aliases
 	aliases = !git config --list | grep ^alias\\. | cut -c 7- | grep -Ei --color \"$1\" "#"
+[commit]
+	; src: https://jvns.ca/blog/2024/02/16/popular-git-config-options/#commit-verbose-true
+	verbose = true
+[push]
+	; src: https://jvns.ca/blog/2024/02/16/popular-git-config-options/#push-default-simple-push-default-current-push-autosetupremote-true
+	; https://stackoverflow.com/questions/6089294/how-to-avoid-having-to-do-git-branch-set-upstream-and-instead-default-to-au
+	; INFO: When you create a new local branch and push it, Git will automatically set up a tracking relationship with a remote branch of the same name. This eliminates need to manually do `git push -u origin branch`
+	; NOTE: good for single origin remotes, bad for a bunch of upstreams/forks.
+	autoSetupRemote = true
+	; INFO: pushes only the current branch to its matching upstream to prevent multi-branch pushes
+	default = simple
 
 
 ; [user]

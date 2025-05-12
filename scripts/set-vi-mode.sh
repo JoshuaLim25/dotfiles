@@ -20,7 +20,7 @@ bindkey '^w' backward-kill-word
 # Bind backspace to delete a character in vi insert mode
 bindkey -M viins '^H' backward-delete-char
 bindkey -M viins '^?' vi-backward-delete-char
-bindkey '^r' history-incremental-search-backward
+# bindkey '^r' history-incremental-search-backward
 
 # Go to prev directory
 bindkey -s -M viins "^o" "popd -q\n"

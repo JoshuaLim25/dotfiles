@@ -80,9 +80,11 @@
 - `libscfg`
 - `libvarlink`
 - `kanshi`
+- `git-delta`
 - `ed`
 - `bluez`
 - `bluez-utils`
+- `eza`
 
 ## Sway
 

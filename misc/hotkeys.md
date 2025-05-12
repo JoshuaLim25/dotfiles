@@ -1,3 +1,19 @@
+# FZF
+- `f`: general "find file and edit"
+- `ff`: fuzzy find files with rg, then edit
+- `CTRL-T`: file picker
+- `ALT-C`: better cd
+
+- `^G^B`           <!-- branches   -->
+- `^G^E`           <!-- each_ref   -->
+- `^G^F`           <!-- files      -->
+- `^G^H`           <!-- hashes     -->
+- `^G^L`           <!-- reflogs   -->
+- `^G^R`           <!-- remotes    -->
+- `^G^S`           <!-- stashes    -->
+- `^G^T`           <!-- tags       -->
+- `^G^W`           <!-- worktrees  -->
+
 # TMUX
 - `<prefix>Y` : copy `$(pwd)`
 - `<prefix>&` : kill window (with all the panes) 

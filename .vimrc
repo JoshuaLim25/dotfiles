@@ -3,6 +3,9 @@
 " 1. mkdir -p ~/.vim/colors
 " 2. wget https://raw.githubusercontent.com/sainnhe/gruvbox-material/refs/heads/master/colors/gruvbox-material.vim -O ~/.vim/colors/gruvbox-material.vim
 
+" TODO: look into fixing paste behavior: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+" originally from this: https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/38258720#38258720
+
 set termguicolors " set t_Co=256  
 syntax enable
 " colorscheme gruvbox-material
