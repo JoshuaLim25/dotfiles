@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cmd=$1
+
+if [ -x "$(command -v $cmd)" ]; then
+    echo "$(which $cmd)"
+else
+    echo "${cmd} not found..."
+fi
+
+curl -sSL "cht.sh/${cmd}"

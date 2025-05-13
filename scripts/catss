@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# See if a program exists on computer: https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
+
+if [[ -x "$(command -v bat)" ]]; then
+    bat $(which $1)
+else 
+    cat $(which $1)
+fi
