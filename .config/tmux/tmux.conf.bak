@@ -24,7 +24,7 @@
 # [[ ENABLE ESSENTIAL FEATURES ]] {{
 # [[ TRUE COLOR SUPPORT ]]
 # This approach hardcodes specific env
-# set-option -g default-terminal "xterm-256color" # "tmux, use a terminal that supports 24-bit color"
+# set-option -g default-terminal "xterm-256color" # "tmux, use a terminal that supports 24-bit color" 
 # set-option -ag terminal-overrides ',xterm-256color:RGB' # enables the specific capability (24-bit, true color)
 
 # This approach is more adaptable. Opts taken from: https://github.com/wfxr/dotfiles/blob/master/tmux/tmux.conf
@@ -105,7 +105,7 @@ set -g @resurrect-capture-pane-contents 'on'
 #      Status Bar     #
 #########################
 
-# Can use a custom colorscheme palette like so:
+# Can use ustom colorscheme palette:
 # source-file ~/.tmux/themes/tmux-kanagawa-dark.conf
 
 # Basic
@@ -117,20 +117,18 @@ set -g status-style "fg=#c5c8c6,bg=#282a2e"
 
 # Status Bar Left
 set -g status-left-style "fg=#c5c8c6,bg=#373b41"
-set -g status-left "#[fg=#1d1f21,bg=#81a2be,bold] #S #[default]"
+set -g status-left "#[fg=#1d1f21,bg=#81a2be,bold] #S #[fg=#81a2be,bg=#282a2e]"
 
 # Status Bar Right
 set -g status-right-style "fg=#c5c8c6,bg=#373b41"
-set -g status-right "#[fg=#707880,bg=#282a2e,nobold]#{?client_prefix,#[fg=#cc6666]<P> ,}#{?client_ssh,#[fg=#b5bd68] #h ,}#[fg=#1d1f21,bg=#81a2be,bold] %a %m/%d %I:%M %p #[default]"
-
+set -g status-right "#[fg=#707880,bg=#282a2e] #{?client_prefix,#[fg=#cc6666]<Prefix> ,}#[fg=#81a2be,bg=#282a2e]#[fg=#1d1f21,bg=#81a2be,bold] %a %m/%d %I:%M %p "
 
 # Window Status
 setw -g window-status-style "fg=#707880,bg=#282a2e"
 setw -g window-status-current-style "fg=#c5c8c6,bg=#373b41,bold"
+setw -g window-status-current-format "#[fg=#282a2e,bg=#373b41]#[fg=#81a2be] #I:#W#F #[fg=#373b41,bg=#282a2e]"
 setw -g window-status-format " #I:#W#F "
 setw -g window-status-separator ""
-# For yellow asterisk :)
-setw -g window-status-current-format "#[fg=#282a2e,bg=#373b41]#[fg=#81a2be] #I:#W#[fg=#f0c674]#F #[fg=#373b41,bg=#282a2e]"
 
 # Window Status Activity
 setw -g window-status-activity-style "fg=#f0c674,bg=#282a2e"
@@ -185,19 +183,19 @@ unbind [ # was changing layouts, never used it though
 bind-key Space copy-mode
 
 # OLD:
-# bind-key -T copy-mode-vi v send-keys -X begin-selection
-# bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-# # bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-# bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy && wl-paste -n | wl-copy -p"
-# bind-key p run "wl-paste -n | tmux load-buffer - ; tmux paste-buffer"
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+# bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy && wl-paste -n | wl-copy -p"
+bind-key p run "wl-paste -n | tmux load-buffer - ; tmux paste-buffer"
 
 # NEW
-bind -T copy-mode-vi v      send -X begin-selection
-bind -T copy-mode-vi C-v    send -X rectangle-toggle
-bind -T copy-mode-vi y      send -X copy-selection-and-cancel
-bind -T copy-mode-vi Escape send -X cancel
-bind -T copy-mode-vi L      send -X end-of-line
-bind -T copy-mode-vi H      send -X start-of-line
+# bind -T copy-mode-vi v      send -X begin-selection
+# bind -T copy-mode-vi C-v    send -X rectangle-toggle
+# bind -T copy-mode-vi y      send -X copy-selection-and-cancel
+# bind -T copy-mode-vi Escape send -X cancel
+# bind -T copy-mode-vi L      send -X end-of-line
+# bind -T copy-mode-vi H      send -X start-of-line
 
 # Toggle status bar
 unbind t  # was time
