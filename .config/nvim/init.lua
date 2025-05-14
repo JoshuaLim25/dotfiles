@@ -15,6 +15,9 @@ require 'options'
 -- [[ Basic Keymaps ]]
 require 'keymaps'
 
+-- [[ Basic Autommands ]]
+require 'autocommands'
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 -- [[ Configure and install plugins ]]
 require 'plugins'

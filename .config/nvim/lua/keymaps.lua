@@ -3,6 +3,7 @@
 -- [[ ESSENTIAL ]] {{
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local autocmds = require 'autocommands'
 
 -- [[ NORMAL MODE ]]
 keymap('i', 'jk', '<esc>', opts)
@@ -97,13 +98,60 @@ keymap('n', '<leader>cc', '<cmd>w !wl-copy<cr><cr>') -- copy entire buffer into 
 -- }}
 
 -- [[ BUILTIN TERMINAL ]] {{
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
--- keymap('t', '<leader><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- credits: TJ Devries
+local state = {
+  floating = {
+    buf = -1,
+    win = -1,
+  },
+}
+
+local function create_floating_window(opts)
+  opts = opts or {}
+  local width = opts.width or math.floor(vim.o.columns * 0.8)
+  local height = opts.height or math.floor(vim.o.lines * 0.8)
+
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  local buf = nil
+  if vim.api.nvim_buf_is_valid(opts.buf) then
+    buf = opts.buf
+  else
+    buf = vim.api.nvim_create_buf(false, true)
+  end
+
+  local win_config = {
+    relative = 'editor',
+    border = 'rounded',
+    style = 'minimal',
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+  }
+
+  local win = vim.api.nvim_open_win(buf, true, win_config)
+  return { buf = buf, win = win }
+end
+
+local new_terminal = function()
+  if not vim.api.nvim_win_is_valid(state.floating.win) then
+    state.floating = create_floating_window { buf = state.floating.buf }
+    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+      vim.cmd.terminal()
+    end
+    -- Start float terminal in insert mode
+    vim.api.nvim_set_current_win(state.floating.win)
+    vim.cmd 'startinsert!'
+  else
+    vim.api.nvim_win_hide(state.floating.win)
+  end
+end
+vim.api.nvim_create_user_command('NewTerm', new_terminal, {})
+vim.keymap.set({ 'n', 't' }, '<space>nt', new_terminal)
+-- NOTE: won't work w/tmux :/
+-- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 -- }}
 
 -- [[ GIT STUFF ]] {{
@@ -173,34 +221,6 @@ vim.keymap.set('n', '<leader>dd', function()
 end)
 -- }}
 
--- [[ AUTOCOMMANDS ]] {{
--- [[ HIGHLIGHT YANKED TEXT ]]
--- https://github.com/hendrikmi/dotfiles/blob/main/nvim/lua/core/snippets.lua
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
--- [[ JUMP TO LAST EDIT POSITION IN FILE ]]
--- https://github.com/jonhoo/configs/blob/master/editor/.config/nvim/init.lua
-vim.api.nvim_create_autocmd('BufReadPost', {
-  pattern = '*',
-  callback = function(ev)
-    if vim.fn.line '\'"' > 1 and vim.fn.line '\'"' <= vim.fn.line '$' then
-      -- except for in git commit messages
-      -- https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
-      if not vim.fn.expand('%:p'):find('.git', 1, true) then
-        vim.cmd 'exe "normal! g\'\\""'
-      end
-    end
-  end,
-})
--- }}
-
 -- [[ BUFFERS ]] {{
 keymap('n', '<leader>j', ':bnext<enter>', { noremap = false })
 keymap('n', '<leader>k', ':bprev<enter>', { noremap = false })
@@ -216,18 +236,12 @@ keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Switch focus to upper window' })
 -- [[ SELECT ENTIRE BUFFER ]]
 keymap('n', 'gG', 'gg<S-v>G', { desc = 'Select all' })
 
--- [[ PREVENT ACCIDENTAL WRITES TO BUFFERS THAT SHOULDN'T BE EDITED ]]
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.orig', command = 'set readonly' })
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set readonly' })
+-- [[ TEXT ]] {{
+-- [[ **BOLD**/*ITALICIZE* SELECTION ]]
+keymap('x', '<C-i>', 's*<C-r>"*<Esc>', { noremap = true, silent = true, desc = 'Italicize' })
+keymap('x', '<C-b>', 's**<C-r>"**<Esc>', { noremap = true, silent = true, desc = 'Emphasize' })
 
--- [[ LEAVE PASTE MODE WHEN LEAVING INSERT MODE (IF IT WAS ON) ]]
-vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', command = 'set nopaste' })
-
--- [[ FILETYPE DETECTION (ADD AS NEEDED) ]]
---vim.api.nvim_create_autocmd('BufRead', { pattern = '*.txt', command = 'set filetype=someft' })
--- }}
-
--- [[ SPELLING ]] {{
+-- [[ SPELLING ]]
 -- TODO:
 -- -- Set the keymap to toggle spell checking
 -- keymap('n', '<leader>tsp', ':lua toggle_spell()<CR>', { noremap = true, silent = true, desc = '[T]oggle [S][P]ell' })
@@ -254,93 +268,6 @@ for from, into in pairs(abbreviations) do
 end
 -- }}
 
--- -- shorter columns in text because it reads better that way
--- local text = vim.api.nvim_create_augroup('text', { clear = true })
--- for _, pat in ipairs { 'text', 'markdown', 'mail', 'gitcommit' } do
---   vim.api.nvim_create_autocmd('Filetype', {
---     pattern = pat,
---     group = text,
---     -- command = 'setlocal spell tw=72 colorcolumn=73',
---     command = 'setlocal spell',
---   })
--- end
--- }}
-
--- vim.cmd [[
--- nnoremap <A-j> :m .+1<CR>==
--- nnoremap <A-k> :m .-2<CR>==
--- inoremap <A-j> <Esc>:m .+1<CR>==gi
--- inoremap <A-k> <Esc>:m .-2<CR>==gi
--- vnoremap <A-j> :m '>+1<CR>gv=gv
--- vnoremap <A-k> :m '<-2<CR>gv=gv
---
--- tnoremap <esc><esc> <C-\><C-n>
---
--- "Move from shell to other buffer
--- tnoremap <C-w>h <C-\><C-n><C-w>h<CR>
--- tnoremap <C-w>k <C-\><C-n><C-w>k<CR>
--- tnoremap <C-w>j <C-\><C-n><C-w>j<CR>
--- tnoremap <C-w>l <C-\><C-n><C-w>l<CR>
--- tnoremap <C-h> <C-\><C-n><C-w>h<CR>
--- ]]
-
--- Floating terminal, credits of TJ
-vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
-
-local state = {
-  floating = {
-    buf = -1,
-    win = -1,
-  },
-}
-
-local function create_floating_window(opts)
-  opts = opts or {}
-  local width = opts.width or math.floor(vim.o.columns * 0.8)
-  local height = opts.height or math.floor(vim.o.lines * 0.8)
-
-  local col = math.floor((vim.o.columns - width) / 2)
-  local row = math.floor((vim.o.lines - height) / 2)
-
-  local buf = nil
-  if vim.api.nvim_buf_is_valid(opts.buf) then
-    buf = opts.buf
-  else
-    buf = vim.api.nvim_create_buf(false, true)
-  end
-
-  local win_config = {
-    relative = 'editor',
-    border = 'rounded',
-    style = 'minimal',
-    width = width,
-    height = height,
-    col = col,
-    row = row,
-  }
-
-  local win = vim.api.nvim_open_win(buf, true, win_config)
-
-  return { buf = buf, win = win }
-end
-
-local new_terminal = function()
-  if not vim.api.nvim_win_is_valid(state.floating.win) then
-    state.floating = create_floating_window { buf = state.floating.buf }
-    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
-      vim.cmd.terminal()
-    end
-
-    -- Start float terminal in insert mode
-    vim.api.nvim_set_current_win(state.floating.win)
-    vim.cmd 'startinsert!'
-  else
-    vim.api.nvim_win_hide(state.floating.win)
-  end
-end
-
-vim.api.nvim_create_user_command('NewTerm', new_terminal, {})
-
-vim.keymap.set({ 'n', 't' }, '<space>nt', new_terminal)
-
+-- [[ SET WORKDIR TO FILE YOU'RE EDITING ]]
+keymap('n', '<leader>cd', autocmds.change_to_buf_dir, { noremap = true, silent = true, desc = '[C]hange [D]irectory to buffer path' })
 -- vim: ts=2 sts=2 sw=2 et
