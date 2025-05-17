@@ -1,4 +1,5 @@
 # GNU Stow
+What it does in a sentence: everything in `.dotfiles/` is effectively "placed" in $HOME as is via symlinks, meaning `~/.config/nvim/` is a symlink to `.dotfiles/.config/nvim/`. Just a pointer.
 - *Q*: Why does my directory structure look different from most people that use stow? 
 - *A*: I just have strong disagreements with the default naming convention of stow. The package structure is unintuitive to me and it makes everything so much more confusing than it has to be. Stow uses this "package_name for directories" convention, which I'd assume is trying to multiple stowed configurations more easily (maybe?). If you want to reorganize stuff that way, be my guest; examples of how that works are at the end so go there.
 - Think about why you want to use stow (i.e., what's the purpose of stow?). The point is to keep config files meaningful to you in one nice place, so that you can use `git` or some other vcs to store it for you, rather than locally.

@@ -85,6 +85,7 @@
 - `bluez`
 - `bluez-utils`
 - `eza`
+- `entr`
 
 ## Sway
 
@@ -104,3 +105,18 @@
 - `wtype`
 - `swaylock`
 - `swayidle`
+
+
+# Core Tools
+## Arch
+- `zsh`
+- `nvim`
+- `tmux`
+- `sway`
+- `git`
+- `kitty`
+
+## Ubuntu/Server
+- `vim`
+- `bash`
+- `git`

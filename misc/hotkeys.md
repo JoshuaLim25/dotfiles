@@ -26,7 +26,11 @@ maybe prefix V and H for copying cwd first
 ---
 
 # VIM
-Really been liking `xs` for stuff like `, `
+- `<leader>gj`: next git hunk
+- `<leader>gk`: prev git hunk
+- `<leader>dj`: next diagnostic msg
+- `<leader>dk`: prev diagnostic msg
+- Really been liking `xs` for stuff like `, `
 - `q:`: open the "command line window," press enter on command. Up, down work.
 - `@`: re-run the most recent command you entered
 
@@ -54,4 +58,20 @@ Really been liking `xs` for stuff like `, `
 - `<leader>gj`: next git hunk (next change down)
 - `<leader>gk`: prev git hunk (next change up)
 
+### MINI-AI
+- *Note*: in place of `d` and `a` would be any verb (`y`, `c`, etc) and any qualifier (`i`).
+- *Note*: `n` and `l` exist
+- `daf`: ***Function***
+- `daa`: ***Argument***
+- `dab`: Alias for [( *a {bb} )]
+- `daq`: Alias for ", ', or `
+- `da?`: Manually input left, right
+- `dat`: tag
+
+- `va`: [V]isually select [A]round [)]paren
+- `yinq`: [Y]ank [I]nside [N]ext [']quote
+- `ci`: [C]hange [I]nside [']quote
+- `saiw`: [S]urround [A]dd [I]nner [W]ord [)]Paren
+- `sd`: [S]urround [D]elete [']quotes
+- `sr`: [S]urround [R]eplace [)] [']
 ---

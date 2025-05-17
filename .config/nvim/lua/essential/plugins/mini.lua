@@ -2,28 +2,73 @@ return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [']quote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      -- WARN: THIS IS IRREPLACEABLE. DO NOT REMOVE.
+      -- TODO: https://github.com/echasnovski/mini.ai/blob/main/lua/mini/ai.lua
+      local spec_treesitter = require('mini.ai').gen_spec.treesitter
+      require('mini.ai').setup {
+        n_lines = 500,
+        custom_textobjects = {
+          F = spec_treesitter { a = '@function.outer', i = '@function.inner' },
+          o = spec_treesitter {
+            a = { '@conditional.outer', '@loop.outer' },
+            i = { '@conditional.inner', '@loop.inner' },
+          },
+        },
+      }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup { -- No need to copy this inside `setup()`. Will be used automatically.
-        -- Add custom surroundings to be used on top of builtin ones. For more
-        -- information with examples, see `:h MiniSurround.config`.
-        custom_surroundings = nil,
+        -- Add surroundings to be used on *top of builtin ones*.
+        -- For more info + examples, see `:h MiniSurround.config`.
+        custom_surroundings = {
+          -- Saner defaults: for `text`, su< will <text> and su> will < text >
+          ['('] = { output = { left = '(', right = ')' } },
+          [')'] = { output = { left = '( ', right = ' )' } },
+          ['<'] = { output = { left = '<', right = '>' } },
+          ['>'] = { output = { left = '< ', right = ' >' } },
+          ['{'] = { output = { left = '{', right = '}' } },
+          ['}'] = { output = { left = '{ ', right = ' }' } },
+          ['['] = { output = { left = '[', right = ']' } },
+          [']'] = { output = { left = '[ ', right = ' ]' } },
+
+          -- suh => surrounds target with [[...]], h for "header"
+          ['h'] = {
+            input = { '%[%[().-()%]%]' },
+            output = { left = '[[ ', right = ' ]]' },
+          },
+
+          -- -- Use function to compute surrounding info
+          -- ['*'] = {
+          --   input = function()
+          --     local n_star = MiniSurround.user_input 'Number of * to find'
+          --     local many_star = string.rep('%*', tonumber(n_star) or 1)
+          --     return { many_star .. '().-()' .. many_star }
+          --   end,
+          --   output = function()
+          --     local n_star = MiniSurround.user_input 'Number of * to output'
+          --     local many_star = string.rep('*', tonumber(n_star) or 1)
+          --     return { left = many_star, right = many_star }
+          --   end,
+          -- },
+        },
+
+        custom_textobjects = nil,
 
         -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
         highlight_duration = 500,
 
         -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
+          -- Main textobject prefixes
+          around = 'a',
+          inside = 'i',
+
+          -- Next/last variants
+          around_next = 'an',
+          inside_next = 'in',
+          around_last = 'al',
+          inside_last = 'il',
+
+          -- "Modifiers"
           add = 'su', -- Add surrounding in Normal and Visual modes
           delete = 'sd', -- Delete surrounding
           find = 'sf', -- Find surrounding (to the right)
@@ -48,7 +93,8 @@ return {
         -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
         -- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
         -- see `:h MiniSurround.config`.
-        search_method = 'cover',
+        -- search_method = 'cover',
+        search_method = 'cover_or_next',
 
         -- Whether to disable showing non-error feedback
         silent = false,

@@ -171,6 +171,14 @@ return {
             desc = 'LSP: Disable hover capability from Ruff',
           })
 
+          -- [[ LSP SIGNATURE HELP ]]
+          vim.api.nvim_create_autocmd('CursorMovedI', {
+            buffer = event.buf,
+            callback = function()
+              vim.lsp.buf.signature_help()
+            end,
+          })
+
           -- NOTE: END OF AUTOCOMMANDS
         end,
       })

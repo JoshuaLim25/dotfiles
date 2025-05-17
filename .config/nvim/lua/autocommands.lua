@@ -38,17 +38,15 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 --vim.api.nvim_create_autocmd('BufRead', { pattern = '*.txt', command = 'set filetype=someft' })
 -- }}
 
--- [[ SHORTER COLUMNS IN TEXT ]]
--- local text = vim.api.nvim_create_augroup('text', { clear = true })
--- for _, pat in ipairs { 'text', 'markdown', 'mail', 'gitcommit' } do
---   vim.api.nvim_create_autocmd('Filetype', {
---     pattern = pat,
---     group = text,
---     -- command = 'setlocal spell tw=72 colorcolumn=73',
---     command = 'setlocal spell',
---   })
--- end
--- }}
+-- [[ SET SPELL FOR TEXT FILETYPES ]]
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('setspell', { clear = true }),
+  pattern = { 'markdown', 'text', 'gitcommit' },
+  callback = function()
+    -- command = 'setlocal spell tw=72 colorcolumn=73',
+    vim.opt_local.spell = true
+  end,
+})
 
 -- [[ SET WORKDIR TO FILE YOU'RE EDITING ]]
 -- Use case: open random ass file, realize you wanna be in that dir,
@@ -59,4 +57,5 @@ M.change_to_buf_dir = function()
   vim.cmd('cd ' .. dir)
   print('cwd → ' .. dir)
 end
+
 return M

@@ -54,17 +54,19 @@ return {
 
         -- [[ AESTHETIC WINDOWS ]] {{
         window = {
-          completion = { -- rounded border; thin-style scrollbar
-            border = 'rounded',
-            -- scrollbar = '║',
-            scrollbar = true,
-          },
-          documentation = { -- no border; native-style scrollbar
-            -- border = nil,
-            border = 'rounded',
-            scrollbar = '║',
-            -- other options
-          },
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+          -- completion = { -- rounded border; thin-style scrollbar
+          --   -- border = 'rounded',
+          --   -- -- scrollbar = '║',
+          --   -- scrollbar = true,
+          -- },
+          -- documentation = { -- no border; native-style scrollbar
+          --   -- border = nil,
+          --   border = 'rounded',
+          --   scrollbar = '║',
+          --   -- other options
+          -- },
         },
 
         -- This has ligher window frames
@@ -96,59 +98,71 @@ return {
         -- },
         -- }}
 
+        -- TODO: only if you ever hate your borders {{
+        -- https://www.reddit.com/r/neovim/comments/16qcncm/how_do_you_put_borders_on_this_lsp_preview_ive/
+        -- NOTE: just to have it
+        -- specify what border looks like
+        -- local border = {
+        --   { '┌', 'FloatBorder' },
+        --   { '─', 'FloatBorder' },
+        --   { '┐', 'FloatBorder' },
+        --   { '│', 'FloatBorder' },
+        --   { '┘', 'FloatBorder' },
+        --   { '─', 'FloatBorder' },
+        --   { '└', 'FloatBorder' },
+        --   { '│', 'FloatBorder' },
+        -- }
+
+        -- -- Add the border on hover and on signature help popup window
+        -- local handlers = {
+        --   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+        --   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+        -- }
+
+        -- -- Add border to the diagnostic popup window
+        -- vim.diagnostic.config({
+        --   virtual_text = {
+        --     prefix = '■ ', -- Could be '●', '▎', 'x', '■', , 
+        --   },
+        --   float = { border = border },
+        -- })
+
+        -- -- Add the border (handlers) to the lua language server
+        -- lspconfig.lua_ls.setup({
+        --   handlers = handlers,
+        --   -- The rest of the server configuration
+        -- })
+
+        -- -- Add the border (handlers) to the pyright server
+        -- lspconfig.pyright.setup({
+        --   handlers = handlers,
+        -- })
+        -- }}
+
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         mapping = cmp.mapping.preset.insert {
-          -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-          -- HMMMM
-          -- vim.cmd("highlight FloatBorder guibg=NONE")
-
-          -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-          -- Accept ([y]es) the completion.
-          --  This will auto-import if your LSP supports it.
-          --  This will expand snippets if the LSP sent a snippet.
+          --  This will also (1) auto-import if the LSP supports it, and (2) expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-          -- Manually trigger a completion from nvim-cmp.
-          --  Generally you don't need this, because nvim-cmp will display
-          --  completions whenever it has completion options available.
-
-          -- NOTE: if you want this functionality, change the mapping, tmux conflict w/ leader key
-          ['<C-c>'] = cmp.mapping.complete {},
-
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-
-          -- NOTE: UNCOMMENT below to enable this, change the mapping, swaywm conflict
-          ['<C-l>'] = cmp.mapping(function()
+          -- This means "go to next thing in the snippet", whether that be expanding (accepting a suggestion) or go to the next field in a snippet.
+          ['<C-j>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-k>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
+          ['<C-o>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
+            end
+          end, { 'i', 's' }),
+          vim.keymap.set('n', '<leader><leader>s', '<cmd>source ~/.config/nvim/snippets/go.lua<CR>'),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -160,8 +174,9 @@ return {
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
+          { name = 'nvim_lsp_signature_help', priority = 900 }, -- hovering lsp signatures as you type
+          { name = 'nvim_lsp', priority = 900 },
+          { name = 'luasnip', priority = 1000 }, -- includes my custom snippets
           { name = 'path' },
         },
       }

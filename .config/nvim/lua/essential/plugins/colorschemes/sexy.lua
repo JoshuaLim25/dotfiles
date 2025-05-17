@@ -79,7 +79,7 @@ return {
                 number = '#c4746e',
                 constant = '#de935f',
                 identifier = '#f0c674',
-                parameter = '#b294bb',
+                parameter = '#b5bd68',
                 fun = '#81a2be',
                 statement = '#b294bb',
                 keyword = '#b294bb',

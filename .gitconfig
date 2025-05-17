@@ -39,6 +39,8 @@
 	p = push
 	l = log --oneline --graph --decorate
 	ll = log --graph --decorate
+	ls = ls-files
+	lla = ls-files --cached --deleted --modified --others --exclude-standard 
 
 	# Branches and remotes
 	b = branch

@@ -1,4 +1,5 @@
--- NOTE: weird modes — vblock (x), term (t), cmd mode (c), visual, meaning `v` and `V,` is (v)
+-- NOTE: weird modes — vblock/`<C-v>` (x), term (t), cmd mode/`:` (c), visual (v), visual line (V)
+-- o: "operator-pending" mode - when you wait for a motion after an operator like d, y, c (e.g., after pressing d but before a movement)
 
 -- [[ ESSENTIAL ]] {{
 local keymap = vim.keymap.set
@@ -15,6 +16,7 @@ keymap('n', 'cu', 'ct_', opts)
 keymap('n', 'du', 'dt_', opts)
 keymap({ 'n', 'v', 'x', 'o' }, 'H', '^', opts)
 keymap({ 'n', 'v', 'x', 'o' }, 'L', '$', opts)
+keymap({ 'n', 'v', 'x', 'o' }, '<C-e>', '$%', opts) -- WHY DIDNT I DO THIS EARLIER
 
 -- [[ TOGGLE SEARCH HIGHLIGHTS ]]
 keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -54,9 +56,6 @@ keymap('n', '<leader>so', ':.!sh<cr>', { noremap = true, desc = '[S]hell [O]utpu
 -- [[ ANTI-TEXTWRAP ]]
 keymap({ 'n', 'v' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 keymap({ 'n', 'v' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- [[ EDIT PASTE REGISTER ]]
-keymap('n', '<leader>e"', ":<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>", opts)
 
 -- [[ VERTICAL MVMT ]]
 keymap('n', '<C-d>', '<C-d>zz', opts)
@@ -166,11 +165,8 @@ keymap('v', '<leader>l', ":<c-u>exe ':term git log -L' line(\"'<\").','.line(\"'
 -- }}
 
 -- [[ DIAGNOSTICS ]] {{
-keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show floating diagnostic [E]rror messages' })
-keymap('n', '<leader>qq', vim.diagnostic.setloclist, { desc = '[Q]uickly show my [Q]uickfixes' })
-keymap('n', '<leader>ql', vim.diagnostic.setqflist, { desc = 'Send diagnostics to [Q]uickfix [L]ist' })
+keymap('n', '<leader>dj', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+keymap('n', '<leader>dk', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
@@ -196,16 +192,15 @@ vim.diagnostic.config {
     title_pos = 'left',
     header = '',
   },
-  virtual_text = true,
+  -- virtual_text = true, -- this is the floating errors
   underline = true,
   update_in_insert = false,
   severity_sort = true,
 }
 
 -- [[ TOGGLE DIAGNOSTICS ]]
-
 local diagnostics_active = true
-vim.keymap.set('n', '<leader>dd', function()
+vim.keymap.set('n', '<leader>td', function()
   diagnostics_active = not diagnostics_active
   -- this only eliminates some
   vim.diagnostic.config {
@@ -250,6 +245,11 @@ keymap('x', '<C-b>', 's**<C-r>"**<Esc>', { noremap = true, silent = true, desc =
 keymap('n', '<leader>spc', 'z=', { noremap = true, silent = true, desc = '[S][P]ell auto[C]omplete possible words' })
 keymap('n', '<leader>spa', 'zg', { noremap = true, silent = true, desc = '[S][P]ell [A]dd to dictionary' })
 keymap('n', '<leader>spd', 'zw', { noremap = true, silent = true, desc = '[S][P]ell [D]elete from dictionary' })
+
+-- [[ CORRECT SPELLING MISTAKES ]]
+-- src: https://castel.dev/post/lecture-notes-1/#correcting-spelling-mistakes-on-the-fly
+-- Used in conjuction w/builtin C-w
+-- keymap('i', '<C-b>', '<c-g>u<Esc>[s1z=gi<c-g>u', opts)
 
 -- [[ AUTOCORRECT ]]
 local abbreviations = {

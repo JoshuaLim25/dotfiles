@@ -23,7 +23,7 @@ require 'autocommands'
 require 'plugins'
 
 -- [[ Load LuaSnip Snippets ]]
-require('luasnip.loaders.from_lua').lazy_load { paths = { '~/.config/nvim/snippets' } }
+require('luasnip.loaders.from_lua').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snippets' } }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

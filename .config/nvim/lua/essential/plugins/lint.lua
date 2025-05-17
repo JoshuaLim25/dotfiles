@@ -1,20 +1,20 @@
 return {
-
-  { -- Linting
+  {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
+        -- go = { 'golangcilint' },
         -- markdown = { 'markdownlint' },
       }
+      -- TODO: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#customize-built-in-linters
 
-      -- To allow other plugins to add linters to require('lint').linters_by_ft,
-      -- instead set linters_by_ft like this:
+      -- INFO: to allow other plugins to add linters to require('lint').linters_by_ft, instead set linters_by_ft like this:
       -- lint.linters_by_ft = lint.linters_by_ft or {}
       -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
-      --
-      -- However, note that this will enable a set of default linters,
+
+      -- NOTE: However this will enable a set of *default linters*,
       -- which will cause errors unless these tools are available:
       -- {
       --   clojure = { "clj-kondo" },
@@ -28,7 +28,7 @@ return {
       --   terraform = { "tflint" },
       --   text = { "vale" }
       -- }
-      --
+
       -- You can disable the default linters by setting their filetypes to nil:
       -- lint.linters_by_ft['clojure'] = nil
       -- lint.linters_by_ft['dockerfile'] = nil

@@ -47,8 +47,8 @@ return {
     t { "hash " }, i(1, "cmd"), t { " &>/dev/null " }, i(2, "&&"),
   }),
 
-  s("temp", {
-    t { 'trap \'command rm -rf $' }, i(1, "TEMP"), t { '\' ' }, i(2, "EXIT INT TERM HUP"), t { '', '' },
+  s("tempdir", {
+    t { 'trap \'command rm -rf "$' }, i(1, "temp_dir\""), t { '\' ' }, i(2, "EXIT INT TERM HUP"), t { '', '' },
     rep(1), t { '="$(mktemp -' }, i(3, "d"), t { 't ' }, i(4, '"$(basename "$0")"'), t { '.XXXXXX)"', '' },
   }),
 

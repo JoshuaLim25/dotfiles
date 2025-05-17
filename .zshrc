@@ -116,9 +116,10 @@ eval "$(fzf --zsh)"
 # https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 # https://github.com/junegunn/fzf?tab=readme-ov-file#tips
 export FZF_TMUX_OPTS=" -p90%,80% "
-export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --hidden --follow --exclude .git "
-export FZF_DEFAULT_OPTS="--height 80% --layout reverse --border --color=hl:#7AA89F --preview-window=right:80% --bind 'ctrl-d:preview-page-down' --bind 'ctrl-u:preview-page-up' --bind 'CTRL-O:toggle-preview-wrap'"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --hidden --follow --exclude '.git'"
+export FZF_DEFAULT_OPTS="--height 80% --layout reverse --border --color=hl:#7AA89F --preview-window=right:60% --bind 'ctrl-d:preview-page-down' --bind 'ctrl-u:preview-page-up' --bind 'CTRL-O:toggle-preview-wrap'"
+# export FZF_DEFAULT_OPTS="--height 50% --layout reverse --border --color=hl:#7AA89F"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude '.git'"
 # https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-t
 export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview 'bat --color=always -n --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--select-1 --exit-0 --preview 'eza --icons=always --tree --color=always {} | head -200'"
@@ -195,6 +196,9 @@ abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
 # abbrev-alias s="source development.env && source seedenv/bin/activate"
 abbrev-alias lsout='ls ./output | wc -l'
 
+# [[ SHELL ]]
+abbrev-alias watchdir="watch -g -n 0.1 ls"
+
 # [[ GIT ]]
 abbrev-alias g="git "
 
@@ -213,9 +217,13 @@ cargo clippy -- \
 -W clippy::unwrap_used \
 '
 
-# [[ TMUX ]] {{
+# [[ GO ]]
+abbrev-alias gorun='ls *.go | entr -c go run /_' # e.g., rungo test.txt
+
+# [[ TMUX ]]
 abbrev-alias t="tmux"
 abbrev-alias tnew="tmux new -s"
+# }}
 
 # [[ ALIASES ]] {{
 # [[ SHELL ]]
@@ -298,4 +306,5 @@ alias refgit="nvim ~/spaghetti/tools/git.md"
 alias refvim="nvim ~/spaghetti/tools/vim.md"
 alias refgrep="nvim ~/spaghetti/tools/grep.md"
 alias refuml="nvim ~/spaghetti/tools/uml.md"
+alias refentr="nvim ~/spaghetti/tools/entr.md"
 # }}
