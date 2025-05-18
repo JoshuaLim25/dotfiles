@@ -17,14 +17,21 @@ local p = require('luasnip.extras').partial
 local m = require('luasnip.extras').match
 local n = require('luasnip.extras').nonempty
 local dl = require('luasnip.extras').dynamic_lambda
-local fmt = require('luasnip.extras.fmt').fmt
-local fmta = require('luasnip.extras.fmt').fmta
+local fmt = require('luasnip.extras.fmt').fmt -- {} placeholders
+local fmta = require('luasnip.extras.fmt').fmta -- <> placeholders
 local types = require 'luasnip.util.types'
 local conds = require 'luasnip.extras.conditions'
 local conds_expand = require 'luasnip.extras.conditions.expand'
 
 -- stylua: ignore
 return {
+  s("cmd?", fmt([[
+   if ! command -v {} &>/dev/null; then 
+     echo "{} not installed." 
+     exit 42
+   fi
+  ]], { i(1), rep(1) } )),
+
   s("bash", {
     t { "#!/usr/bin/env bash", "" },
   }),

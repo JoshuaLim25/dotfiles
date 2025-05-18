@@ -1,5 +1,6 @@
 # IMPORTANT NOTE
 ---
+- [Mandatory viewing](https://xkcd.com/1205/)
 - This houses all of the configurations for the programs I use. I have spent lots and lots of time to make it grug simple to understand and navigate, but keep in mind that this is a configuration for **my personal use**, first and foremost. This is a living config, and things will not necessarily always look the same. Feel free to judge me for decisions you find janky or idiotic—unfortunately I do not care :(
 - I hope this helps you in making your own configuration; config customization and management is a deep, deep rabbit hole and it's easy to get overwhelmed. Take things slow and remember to focus on tweaking the things that are actual hindrances to your workflow, rather than "oh this looks pretty I should spend the next few hours tinkering with this to get it working with everything instead of getting some shit i actually need to do done" (not speaking from experience).
 - I have included references for anything I took from others' repositories. Taking a look at how other do things is absolutely a good idea for you as well.

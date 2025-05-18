@@ -3,6 +3,9 @@
 # TODOs
 ---
 
+nvim:
+- [ ] overhaul all, keep what you can.
+- [ ] focus: colors on right nodes, formatting,
 
 
 # SHORTER TERM

@@ -197,6 +197,9 @@ abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
 abbrev-alias lsout='ls ./output | wc -l'
 
 # [[ SHELL ]]
+abbrev-alias ..="cd .."
+abbrev-alias ...="cd ../.."
+abbrev-alias ....="cd ../../.."
 abbrev-alias watchdir="watch -g -n 0.1 ls"
 
 # [[ GIT ]]
@@ -267,7 +270,7 @@ alias vdiff='nvim -d'
 alias py='python3'
 alias tree="tree -L 3 -a -I '.git' --charset X "
 alias minitree="tree -aL 3 --prune"
-alias dtree="tree -L 3 -a -d -I '.git' --charset X "
+alias dirtree="tree -L 3 -a -d -I '.git' --charset X "
 alias todo='nvim ~/misc/TODO.md'
 alias hk='nvim ~/misc/hotkeys.md'
 alias remind='nvim ~/misc/reminders.md'
@@ -296,6 +299,7 @@ alias bbash="nvim ~/spaghetti/langs/bash/bad_bash.sh"
 alias refcpp="nvim ~/spaghetti/langs/c++/ref.md"
 alias refrust="nvim ~/spaghetti/langs/rust/reference-code/help.rs"
 alias refgo="nvim ~/spaghetti/langs/go/golang-cheatsheet.md"
+alias reflua="nvim ~/spaghetti/langs/lua/basics.md"
 # [[ TOOLS ]]
 alias refvm="nvim ~/spaghetti/tools/vm-ref.md"
 alias refjson="nvim ~/spaghetti/tools/json.md"

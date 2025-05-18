@@ -14,9 +14,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = '*',
   callback = function()
-    if vim.fn.line '\'"' > 1 and vim.fn.line '\'"' <= vim.fn.line '$' then
-      if not vim.fn.expand('%:p'):find('.git', 1, true) then
-        vim.cmd 'normal! g\'"'
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lnum = mark[1]
+    local col = mark[2]
+    if lnum > 1 and lnum <= vim.api.nvim_buf_line_count(0) then
+      if not vim.fn.expand('%:p'):find '/%.git/' then
+        vim.schedule(function()
+          pcall(vim.api.nvim_win_set_cursor, 0, { lnum, col })
+        end)
       end
     end
   end,
@@ -53,9 +58,17 @@ vim.api.nvim_create_autocmd('FileType', {
 -- so you <leader>cd and open a new pane to do stuff
 M.change_to_buf_dir = function()
   local filepath = vim.api.nvim_buf_get_name(0)
+  if filepath == '' then
+    vim.notify('[cd] No file path detected.', vim.log.levels.WARN)
+    return
+  end
   local dir = vim.fn.fnamemodify(filepath, ':p:h')
-  vim.cmd('cd ' .. dir)
-  print('cwd → ' .. dir)
+  if vim.fn.isdirectory(dir) == 1 then
+    vim.cmd('lcd ' .. vim.fn.fnameescape(dir))
+    vim.notify('cwd → ' .. dir, vim.log.levels.INFO)
+  else
+    vim.notify('Invalid directory: ' .. dir, vim.log.levels.ERROR)
+  end
 end
 
 return M
