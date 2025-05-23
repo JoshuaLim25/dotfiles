@@ -1,0 +1,2 @@
+-- TODO: look into https://github.com/ThePrimeagen/refactoring.nvim, seems great
+-- keymaps: https://github.com/kiyoon/dotfiles/blob/master/nvim/lua/kiyoon/refactoring_keys.lua

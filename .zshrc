@@ -25,12 +25,6 @@ fi
 # Source/load Zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# [[ NVIM = DEFAULT EDITOR ]]
-export EDITOR="$(which nvim)"
-export VISUAL="$(which nvim)"
-export FCEDIT="$(which nvim)"
-export MANPAGER='nvim +Man!'
- 
 # [[ EXPORTS ]] {{
 # NOTE: you want to define that directory to the path variable, not the actual binary:
 # EG: `PATH=$MYDIR:$PATH`, where MYDIR is def as the dir containing your binary
@@ -38,6 +32,15 @@ export MANPAGER='nvim +Man!'
 # NOTE: symlinked to ~/.dotfiles/scripts
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/bin/scripts
+
+# [[ NVIM ]]
+export EDITOR="$(which nvim)"
+export VISUAL="$(which nvim)"
+export FCEDIT="$(which nvim)"
+export MANPAGER='nvim +Man!'
+# export NVIM_APPNAME='nvim.bak'
+export NVIM_APPNAME='nvim-test'
+
 
 # RUSTUP TAB COMPLETIONS
 fpath+=~/.zfunc
@@ -197,9 +200,6 @@ abbrev-alias cdbug="cd ~/repos/buildkit/control/gateway/"
 abbrev-alias lsout='ls ./output | wc -l'
 
 # [[ SHELL ]]
-abbrev-alias ..="cd .."
-abbrev-alias ...="cd ../.."
-abbrev-alias ....="cd ../../.."
 abbrev-alias watchdir="watch -g -n 0.1 ls"
 
 # [[ GIT ]]
@@ -230,6 +230,9 @@ abbrev-alias tnew="tmux new -s"
 
 # [[ ALIASES ]] {{
 # [[ SHELL ]]
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias s='source ~/.zshrc'
 alias dot='cd ~/.dotfiles'
 alias vz='nvim ~/.zshrc'
@@ -241,6 +244,8 @@ alias lla="eza -a --no-filesize --git --long --color=always --no-user --classify
 alias lll="eza --long --git --color=always --no-user --classify --tree --level=2"
 alias cat='bat'
 alias bat="bat --color=always --style=numbers,changes,header,grid --italic-text=always"
+alias loc="tokei"
+alias rmrf="kondo"
 alias rm='rm -I' # safety
 alias mv='mv -iv' # safety
 alias grep='rg'
@@ -265,6 +270,7 @@ alias pkg="pacman -Qq | fzf \
 # [[ "QOL" ]]
 # alias f='fzf'
 alias f='fzf --print0 | xargs -0 --no-run-if-empty -- nvim' # and ~/.dotfiles/scripts/ff :)
+bindkey -s ^v 'nvim /usr/share/nvim/runtime/doc/**\t'
 alias pd='pushd'
 alias vdiff='nvim -d'
 alias py='python3'
@@ -311,4 +317,5 @@ alias refvim="nvim ~/spaghetti/tools/vim.md"
 alias refgrep="nvim ~/spaghetti/tools/grep.md"
 alias refuml="nvim ~/spaghetti/tools/uml.md"
 alias refentr="nvim ~/spaghetti/tools/entr.md"
+alias reftest="nvim ~/spaghetti/tools/testing.md"
 # }}

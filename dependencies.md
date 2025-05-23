@@ -86,6 +86,9 @@
 - `bluez-utils`
 - `eza`
 - `entr`
+- `hyperfine`
+- `tokei`
+- `kondo-ui`
 
 ## Sway
 
